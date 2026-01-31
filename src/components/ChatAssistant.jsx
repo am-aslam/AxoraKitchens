@@ -57,7 +57,7 @@ const ChatAssistant = () => {
         <>
             {/* Floating Trigger Button */}
             <motion.button
-                className="fixed bottom-6 right-6 z-[5000] w-14 h-14 bg-text-main text-bg-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform"
+                className="fixed bottom-6 right-6 z-[5000] w-14 h-14 bg-accent text-bg-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform"
                 onClick={() => setIsOpen(!isOpen)}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -77,7 +77,7 @@ const ChatAssistant = () => {
                         transition={{ duration: 0.2 }}
                     >
                         {/* Header */}
-                        <div className="bg-text-main p-4 text-bg-primary flex items-center gap-3 shadow-md">
+                        <div className="bg-accent p-4 text-bg-primary flex items-center gap-3 shadow-md">
                             <div className="w-10 h-10 bg-bg-primary/10 rounded-full flex items-center justify-center">
                                 <Bot size={24} />
                             </div>

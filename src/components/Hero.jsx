@@ -6,29 +6,35 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import heroImage from '../assets/hero.png';
 
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/utils/translations';
+
 const Hero = () => {
+    const { language } = useLanguage();
+    const t = translations[language].hero;
+
     return (
-        <section className="relative min-h-screen flex items-center bg-bg-primary overflow-hidden pt-[var(--header-height)]" id="home">
+        <section className="relative min-h-[100dvh] flex items-center bg-bg-primary overflow-hidden pt-[var(--header-height)]" id="home">
             <div className="max-w-[1400px] mx-auto px-6 w-full">
                 <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="flex-1 text-center lg:text-left z-10"
+                        className="flex-1 text-center lg:text-start z-10"
                     >
-                        <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight text-text-main pb-2">
-                            Elevate Your Living With <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:to-gray-300">Premium Interiors</span>
+                        <h1 className="text-5xl lg:text-7 xl font-bold leading-tight mb-6 tracking-tight text-text-main pb-2">
+                            {t.titlePart1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-text-main via-accent to-text-muted">{t.titlePart2}</span>
                         </h1>
-                        <p className="text-lg lg:text-xl text-text-muted mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Experience the perfect blend of functionality and aesthetics with our bespoke modular kitchens and wardrobe systems.
+                        <p className="text-lg lg:text-xl text-text-muted mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                            {t.subtitle}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <Link href="#products" className="inline-flex items-center justify-center px-8 py-4 rounded-md bg-accent text-bg-primary border border-accent font-medium text-sm hover:opacity-90 transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl uppercase tracking-wider">
-                                Explore Collection
+                                {t.explore}
                             </Link>
                             <Link href="#contact" className="inline-flex items-center justify-center px-8 py-4 rounded-md bg-transparent text-text-main border border-text-main font-medium text-sm hover:bg-text-main hover:text-bg-primary hover:border-text-main transition-all hover:-translate-y-1 uppercase tracking-wider">
-                                Get Free Quote
+                                {t.quote}
                             </Link>
                         </div>
                     </motion.div>

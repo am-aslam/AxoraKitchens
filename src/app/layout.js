@@ -1,8 +1,11 @@
-import { Inter } from "next/font/google";
+import { Inter, Oswald, Tajawal } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
+import { LanguageProvider } from "@/context/LanguageContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
+const tajawal = Tajawal({ subsets: ["arabic"], weight: ["400", "500", "700"], variable: "--font-tajawal" });
 
 export const metadata = {
   title: "AxoraKitchens - Luxury Interior Design",
@@ -11,9 +14,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
-      <body className={`${inter.className} bg-bg-primary text-text-main antialiased`}>
-        <ClientLayout>{children}</ClientLayout>
+    <html suppressHydrationWarning={true}>
+      <body className={`${inter.variable} ${oswald.variable} ${tajawal.variable} bg-bg-primary text-text-main antialiased`}>
+        <LanguageProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </LanguageProvider>
       </body>
     </html>
   );

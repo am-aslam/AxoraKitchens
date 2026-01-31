@@ -3,15 +3,20 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Clock, CheckCircle, ChevronLeft, ChevronRight, Globe, Calendar as CalendarIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/utils/translations';
 
 const Contact = () => {
     // Date Logic
+    const { language, direction } = useLanguage();
+    const t = translations[language].contact;
+
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
     const [duration, setDuration] = useState(30);
     const [countryCode, setCountryCode] = useState('+1');
-    const [category, setCategory] = useState('General Inquiry');
+    const [category, setCategory] = useState(t.categories.general);
     const [formData, setFormData] = useState({ fullName: '', email: '', phone: '' });
     const [feedback, setFeedback] = useState({ show: false, type: '', message: '' });
 
@@ -26,7 +31,20 @@ const Contact = () => {
 
     const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
     const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-    const monthName = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+    const monthName = new Intl.DateTimeFormat(language, { month: 'long', year: 'numeric' }).format(currentDate);
+
+    // Get localized day names
+    const getDayNames = () => {
+        const days = [];
+        for (let i = 0; i < 7; i++) {
+            const d = new Date(2024, 0, i); // Jan 2024 starts on Sunday? Wait, Jan 1 2024 was Monday. Jan 7 2024 is Sunday.
+            // Actually, best way is to pick a known Sunday. Jan 7, 2024 is Sunday.
+            const date = new Date(2024, 0, 7 + i); // Start from Sunday
+            days.push(new Intl.DateTimeFormat(language, { weekday: 'short' }).format(date));
+        }
+        return days;
+    };
+    const dayNames = getDayNames();
 
     const handlePrevMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -47,7 +65,7 @@ const Contact = () => {
             setFeedback({
                 show: true,
                 type: 'error',
-                message: 'Please fill in all fields (Name, Email, Phone) and select a date & time.'
+                message: t.errorDetails || 'Please fill in all fields.'
             });
             return;
         }
@@ -108,14 +126,14 @@ ${countryCode} ${formData.phone}`;
         setFeedback({
             show: true,
             type: 'success',
-            message: 'Email client opened! Please send the email to finalize booking.'
+            message: t.emailOpened || 'Email client opened!'
         });
 
         // Reset Form
         setFormData({ fullName: '', email: '', phone: '' });
         setSelectedDate(null);
         setSelectedTime(null);
-        setCategory('General Inquiry');
+        setCategory(t.categories.general);
         setDuration(30);
         setIsSubmitting(false);
     };
@@ -129,8 +147,8 @@ ${countryCode} ${formData.phone}`;
                     transition={{ duration: 0.6 }}
                     className="mb-12 text-center"
                 >
-                    <h2 className="text-3xl font-bold tracking-tight mb-3">Schedule a Design Consultation</h2>
-                    <p className="text-gray-500 text-lg">Choose a time to meet with our experts.</p>
+                    <h2 className="text-5xl font-bold tracking-tight mb-3 text-text-main">{t.title}</h2>
+                    <p className="text-text-muted text-lg">{t.subtitle}</p>
                 </motion.div>
 
                 <motion.div
@@ -143,14 +161,14 @@ ${countryCode} ${formData.phone}`;
                     <div className="lg:w-1/3 p-8 border-r border-border flex flex-col bg-bg-secondary/30">
                         <div className="mb-8">
                             <h3 className="text-lg font-semibold text-text-main mb-6 flex items-center gap-2">
-                                <span className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs">A</span>
-                                AxoraKitchens Studio
+                                <span className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-bg-primary text-xs font-bold">A</span>
+                                {t.studio}
                             </h3>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-4 text-gray-600">
                                     <Clock className="w-5 h-5 mt-0.5 text-gray-400" />
                                     <div>
-                                        <p className="font-medium">Meeting Duration</p>
+                                        <p className="font-medium">{t.duration}</p>
                                         <div className="flex gap-2 mt-2">
                                             {[30, 45, 60].map(mins => (
                                                 <button
@@ -164,46 +182,46 @@ ${countryCode} ${formData.phone}`;
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-4 text-gray-600">
-                                    <Globe className="w-5 h-5 mt-0.5 text-gray-400" />
-                                    <p className="text-sm pt-0.5">Online / In-Person</p>
+                                <div className="flex items-start gap-4 text-text-muted">
+                                    <Clock className="w-5 h-5 mt-0.5 text-text-muted" />
+                                    <p className="text-sm pt-0.5">{t.type}</p>
                                 </div>
                                 {/* Added Contact Details */}
                                 <div className="flex items-start gap-4 text-gray-600">
                                     <Mail className="w-5 h-5 mt-0.5 text-gray-400" />
                                     <div>
-                                        <p className="font-medium">Email Us</p>
+                                        <p className="font-medium">{t.emailLabel}</p>
                                         <p className="text-sm">contact@axorakitchens.com</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4 text-gray-600">
                                     <Phone className="w-5 h-5 mt-0.5 text-gray-400" />
                                     <div>
-                                        <p className="font-medium">Call Us</p>
+                                        <p className="font-medium">{t.callLabel}</p>
                                         <p className="text-sm">+1 (555) 123-4567</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="mt-auto pt-8 border-t border-gray-100">
-                            <h4 className="text-sm font-semibold text-gray-600 mb-4">Your Details</h4>
+                        <div className="mt-auto pt-8 border-t border-border">
+                            <h4 className="text-sm font-semibold text-text-muted mb-4">{t.yourDetails}</h4>
                             <form onSubmit={handleSend} className="space-y-4">
                                 <div>
-                                    <label className="block text-xs font-medium text-text-muted mb-1">Full Name</label>
+                                    <label className="block text-xs font-medium text-text-muted mb-1">{t.name}</label>
                                     <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full px-3 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main focus:border-text-main outline-none bg-bg-primary text-text-main" required />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-text-muted mb-1">Email Address</label>
+                                    <label className="block text-xs font-medium text-text-muted mb-1">{t.email}</label>
                                     <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-3 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main focus:border-text-main outline-none bg-bg-primary text-text-main" required />
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="w-[120px]">
-                                        <label className="block text-xs font-medium text-text-muted mb-1">Code</label>
+                                        <label className="block text-xs font-medium text-text-muted mb-1">{t.code}</label>
                                         <select
                                             value={countryCode}
                                             onChange={(e) => setCountryCode(e.target.value)}
-                                            className="w-full px-2 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main outline-none bg-bg-primary text-text-main font-mono"
+                                            className={`w-full px-2 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main outline-none bg-bg-primary text-text-main font-mono ${direction === 'rtl' ? 'text-end' : ''}`}
                                         >
                                             <option value="+93">🇦🇫 +93</option>
                                             <option value="+355">🇦🇱 +355</option>
@@ -445,49 +463,57 @@ ${countryCode} ${formData.phone}`;
                                         </select>
                                     </div>
                                     <div className="flex-1">
-                                        <label className="block text-xs font-medium text-text-muted mb-1">Phone Number</label>
+                                        <label className="block text-xs font-medium text-text-muted mb-1">{t.phone}</label>
                                         <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full px-3 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main outline-none bg-bg-primary text-text-main" required />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-text-muted mb-1">Category</label>
+                                    <label className="block text-xs font-medium text-text-muted mb-1">{t.category}</label>
                                     <select
                                         value={category}
                                         onChange={(e) => setCategory(e.target.value)}
                                         className="w-full px-3 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main outline-none bg-bg-primary text-text-main"
                                     >
-                                        <option>General Inquiry</option>
-                                        <option>Kitchen Design</option>
-                                        <option>Wardrobe Consultation</option>
-                                        <option>Living Space</option>
+                                        <option>{t.categories.general}</option>
+                                        <option>{t.categories.kitchen}</option>
+                                        <option>{t.categories.wardrobe}</option>
+                                        <option>{t.categories.living}</option>
                                     </select>
                                 </div>
                                 <button
                                     className="w-full bg-text-main text-bg-primary font-medium py-3 px-4 rounded-md text-sm hover:opacity-90 transition-colors shadow-lg flex items-center justify-center gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                                     disabled={isSubmitting}
                                 >
-                                    {isSubmitting ? 'Opening Email...' : 'Send Message'} <Mail size={16} />
+                                    {isSubmitting ? t.sending : t.send} <Mail size={16} className={direction === 'rtl' ? 'rotate-180' : ''} />
                                 </button>
                             </form>
                         </div>
                     </div>
 
                     {/* Middle Panel: Calendar */}
-                    <div className="lg:w-1/3 p-8 border-r border-gray-100 flex flex-col">
+                    <div className="lg:w-1/3 p-8 border-r border-border flex flex-col">
                         <div className="flex items-center justify-between mb-8">
-                            <h4 className="text-base font-semibold text-gray-900">{monthName}</h4>
-                            <div className="flex gap-1">
-                                <button onClick={handlePrevMonth} className="p-1.5 hover:bg-gray-100 rounded-md text-gray-600 transition-colors">
-                                    <ChevronLeft size={18} />
+                            <h4 className="text-base font-semibold text-text-main">{monthName}</h4>
+                            <div className="flex gap-1" style={{ direction: 'ltr' }}>
+                                {/* Keep buttons in LTR visual order or flip based on logic. Usually Next/Prev arrow icons should be flipped if RTL? Yes. 
+                                    Or just keep them LTR as < >. 
+                                    If flow is RTL, > should point to Next (Left visually). 
+                                    Let's just swap icons or functionality?
+                                    Actually, ChevronRight usually means "Forward" regardless of dir, but in RTL "Forward" is Left.
+                                    Lucide icons don't auto-flip.
+                                    I will manually flip them if RTL.
+                                */}
+                                <button onClick={handlePrevMonth} className="p-1.5 hover:bg-bg-secondary rounded-md text-text-muted hover:text-text-main transition-colors">
+                                    {direction === 'rtl' ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
                                 </button>
-                                <button onClick={handleNextMonth} className="p-1.5 hover:bg-gray-100 rounded-md text-gray-600 transition-colors">
-                                    <ChevronRight size={18} />
+                                <button onClick={handleNextMonth} className="p-1.5 hover:bg-bg-secondary rounded-md text-text-muted hover:text-text-main transition-colors">
+                                    {direction === 'rtl' ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
                                 </button>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-7 gap-y-6 gap-x-2 text-center text-sm mb-4">
-                            {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(d => (
+                            {dayNames.map(d => (
                                 <div key={d} className="text-[10px] font-bold text-text-muted tracking-wider text-center">{d}</div>
                             ))}
                         </div>
@@ -504,21 +530,21 @@ ${countryCode} ${formData.phone}`;
                                         whileTap={{ scale: 0.95 }}
                                         onClick={() => { setSelectedDate(day); setSelectedTime(null); }}
                                         className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center text-sm font-medium transition-all relative ${isSelected
-                                            ? 'bg-gray-900 text-white shadow-md'
+                                            ? 'bg-accent text-bg-primary shadow-md font-bold'
                                             : isToday
-                                                ? 'bg-gray-100 text-gray-900 font-bold'
-                                                : 'text-gray-700 hover:bg-gray-100'
+                                                ? 'bg-bg-secondary text-text-main font-bold border border-border'
+                                                : 'text-text-muted hover:bg-bg-secondary hover:text-text-main'
                                             }`}
                                     >
                                         {day}
-                                        {isToday && !isSelected && <span className="absolute bottom-1 w-1 h-1 bg-gray-400 rounded-full"></span>}
+                                        {isToday && !isSelected && <span className="absolute bottom-1 w-1 h-1 bg-accent rounded-full"></span>}
                                     </motion.button>
                                 );
                             })}
                         </div>
 
                         {/* Map Integration */}
-                        <div className="mt-auto w-full h-[200px] rounded-lg overflow-hidden border border-gray-200 shadow-sm relative group">
+                        <div className="mt-auto w-full h-[200px] rounded-lg overflow-hidden border border-border shadow-sm relative group">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30596698663!2d-74.25986872591605!3d40.6971494132049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1709230000000!5m2!1sen!2sus"
                                 width="100%"
@@ -539,9 +565,9 @@ ${countryCode} ${formData.phone}`;
                         </h4>
 
                         {!selectedDate ? (
-                            <div className="flex flex-col items-center justify-center h-64 text-gray-400">
+                            <div className="flex flex-col items-center justify-center h-64 text-text-muted">
                                 <CalendarIcon size={48} className="mb-4 opacity-50" />
-                                <p className="text-sm">Please select a date to view available times.</p>
+                                <p className="text-sm">{t.subtitle}</p>
                             </div>
                         ) : (
                             <motion.div
@@ -556,8 +582,8 @@ ${countryCode} ${formData.phone}`;
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: idx * 0.05 }}
                                         onClick={() => setSelectedTime(time)}
-                                        className={`w-full py-3 px-4 rounded-lg border text-sm font-medium text-left transition-all relative group ${selectedTime === time
-                                            ? 'bg-bg-primary border-text-main ring-2 ring-text-main text-text-main pr-10 shadow-sm'
+                                        className={`w-full py-3 px-4 rounded-lg border text-sm font-medium transition-all relative group ${direction === 'rtl' ? 'text-right' : 'text-left'} ${selectedTime === time
+                                            ? 'bg-bg-primary border-text-main ring-2 ring-text-main text-text-main shadow-sm'
                                             : 'bg-bg-primary border-border text-text-muted hover:border-text-muted hover:shadow-sm'
                                             }`}
                                     >
@@ -587,10 +613,10 @@ ${countryCode} ${formData.phone}`;
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-bg-primary p-8 rounded-xl shadow-2xl max-w-sm w-full text-center border border-border"
                     >
-                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${feedback.type === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${feedback.type === 'success' ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'}`}>
                             {feedback.type === 'success' ? <CheckCircle size={32} /> : <span className="text-3xl font-bold">!</span>}
                         </div>
-                        <h3 className="text-xl font-bold text-text-main mb-2">{feedback.type === 'success' ? 'Booking Confirmed' : 'Incomplete Details'}</h3>
+                        <h3 className="text-xl font-bold text-text-main mb-2">{feedback.type === 'success' ? t.successTitle : t.errorTitle}</h3>
                         <p className="text-text-muted mb-6">{feedback.message}</p>
                         <button
                             onClick={closeFeedback}
