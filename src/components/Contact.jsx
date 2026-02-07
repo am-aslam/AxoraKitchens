@@ -165,8 +165,8 @@ ${countryCode} ${formData.phone}`;
                                 {t.studio}
                             </h3>
                             <div className="space-y-4">
-                                <div className="flex items-start gap-4 text-gray-600">
-                                    <Clock className="w-5 h-5 mt-0.5 text-gray-400" />
+                                <div className="flex items-start gap-4 text-text-muted">
+                                    <Clock className="w-5 h-5 mt-0.5 text-text-muted" />
                                     <div>
                                         <p className="font-medium">{t.duration}</p>
                                         <div className="flex gap-2 mt-2">
@@ -187,15 +187,15 @@ ${countryCode} ${formData.phone}`;
                                     <p className="text-sm pt-0.5">{t.type}</p>
                                 </div>
                                 {/* Added Contact Details */}
-                                <div className="flex items-start gap-4 text-gray-600">
-                                    <Mail className="w-5 h-5 mt-0.5 text-gray-400" />
+                                <div className="flex items-start gap-4 text-text-muted">
+                                    <Mail className="w-5 h-5 mt-0.5 text-text-muted" />
                                     <div>
                                         <p className="font-medium">{t.emailLabel}</p>
                                         <p className="text-sm">contact@axorakitchens.com</p>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-4 text-gray-600">
-                                    <Phone className="w-5 h-5 mt-0.5 text-gray-400" />
+                                <div className="flex items-start gap-4 text-text-muted">
+                                    <Phone className="w-5 h-5 mt-0.5 text-text-muted" />
                                     <div>
                                         <p className="font-medium">{t.callLabel}</p>
                                         <p className="text-sm">+1 (555) 123-4567</p>

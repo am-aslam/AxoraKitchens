@@ -13,11 +13,9 @@ export default function ClientLayout({ children }) {
     return (
         <ThemeProvider>
             <LoadingScreen onComplete={() => setLoadingComplete(true)} />
-            <LoadingScreen onComplete={() => setLoadingComplete(true)} />
             <Navbar />
             {children}
             <Footer />
-            <ChatAssistant />
         </ThemeProvider>
     );
 }

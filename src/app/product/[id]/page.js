@@ -1,9 +1,9 @@
 "use client";
 
-import React, { use, useState } from 'react';
+import React, { use } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Check, Star, Box, Maximize, PlayCircle } from 'lucide-react';
+import { ArrowLeft, Check, Star, Maximize, PlayCircle } from 'lucide-react';
 import heroImage from '../../../assets/hero.png';
 import wardrobeImage from '../../../assets/wardrobe.png';
 import marbleImage from '../../../assets/marble.png';
@@ -47,7 +47,7 @@ export default function ProductDetail({ params }) {
     const resolvedParams = use(params);
     const { id } = resolvedParams;
     const product = products[id];
-    const [is3DView, setIs3DView] = useState(false);
+
 
     if (!product) {
         return (
@@ -66,48 +66,25 @@ export default function ProductDetail({ params }) {
                 </Link>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
-                    {/* Image / 3D View Area */}
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-gray-100 group">
-                        {is3DView ? (
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-900 text-white">
-                                <div className="text-center">
-                                    <Box size={48} className="mx-auto mb-4 text-accent animate-pulse" />
-                                    <p className="font-mono text-sm tracking-widest">INTERACTIVE 3D VIEW LOADING...</p>
-                                    <button
-                                        onClick={() => setIs3DView(false)}
-                                        className="mt-6 text-xs underline hover:text-accent"
-                                    >
-                                        Return to Image
-                                    </button>
-                                </div>
-                            </div>
-                        ) : (
-                            <>
-                                <Image src={product.image} alt={product.title} className="object-cover" fill priority />
-                                <div className="absolute bottom-6 left-6 z-10 flex gap-3">
-                                    <button
-                                        onClick={() => setIs3DView(true)}
-                                        className="bg-white/90 backdrop-blur text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider hover:bg-white flex items-center gap-2 transition-all shadow-lg"
-                                    >
-                                        <Box size={14} /> 3D View
-                                    </button>
-                                    <button className="bg-white/90 backdrop-blur text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider hover:bg-white flex items-center gap-2 transition-all shadow-lg">
-                                        <Maximize size={14} /> Fullscreen
-                                    </button>
-                                </div>
-                            </>
-                        )}
+                    {/* Image Area */}
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-bg-secondary group">
+                        <Image src={product.image} alt={product.title} className="object-cover" fill priority />
+                        <div className="absolute bottom-6 left-6 z-10 flex gap-3">
+                            <button className="bg-white/90 backdrop-blur text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider hover:bg-white flex items-center gap-2 transition-all shadow-lg">
+                                <Maximize size={14} /> Fullscreen
+                            </button>
+                        </div>
                     </div>
 
                     <div className="flex flex-col justify-center">
                         <div className="mb-6">
-                            <span className="inline-block px-3 py-1 bg-gray-100 text-xs font-bold uppercase tracking-widest text-gray-500 rounded-full mb-4">Premium Collection</span>
+                            <span className="inline-block px-3 py-1 bg-bg-secondary text-xs font-bold uppercase tracking-widest text-text-muted rounded-full mb-4">Premium Collection</span>
                             <h1 className="text-4xl lg:text-5xl font-bold text-text-main mb-6 tracking-tight">{product.title}</h1>
                             <div className="flex items-center gap-1 mb-6">
                                 {[...Array(5)].map((_, i) => (
                                     <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
                                 ))}
-                                <span className="text-sm text-gray-500 ml-2">(5.0/5 Reviews)</span>
+                                <span className="text-sm text-text-muted ml-2">(5.0/5 Reviews)</span>
                             </div>
                             <p className="text-lg text-text-muted leading-relaxed mb-8 border-l-4 border-accent pl-6">
                                 {product.desc}
@@ -126,13 +103,18 @@ export default function ProductDetail({ params }) {
                             </ul>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row items-center gap-6 pt-8 border-t border-gray-100">
+                        <div className="flex flex-col sm:flex-row items-center gap-6 pt-8 border-t border-border">
                             <div>
-                                <p className="text-sm text-gray-500 mb-1">Estimated Price</p>
+                                <p className="text-sm text-text-muted mb-1">Estimated Price</p>
                                 <p className="text-2xl font-bold text-text-main">{product.price}</p>
                             </div>
                             <Link href="/#contact" className="w-full sm:w-auto flex-1 bg-accent text-white font-medium py-4 px-8 rounded-md uppercase tracking-wider hover:bg-zinc-800 transition-all hover:-translate-y-0.5 shadow-lg text-center">
                                 Request Consultation
+                            </Link>
+                        </div>
+                        <div className="mt-4 text-center">
+                            <Link href="/models" className="text-sm text-accent hover:underline font-medium">
+                                Explore Kitchen Models & Countertops &rarr;
                             </Link>
                         </div>
                     </div>
@@ -143,7 +125,7 @@ export default function ProductDetail({ params }) {
                     <h3 className="text-2xl font-bold mb-10 text-center uppercase tracking-widest">Our Process</h3>
                     <div className="relative">
                         {/* Connecting Line */}
-                        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2 hidden md:block"></div>
+                        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-border -translate-y-1/2 hidden md:block"></div>
 
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                             {timeline.map((step, idx) => (

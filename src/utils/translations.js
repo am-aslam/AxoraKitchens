@@ -6,7 +6,33 @@ export const translations = {
             services: "Services",
             products: "Products",
             contact: "Contact",
-            getQuote: "Get Quote"
+            getQuote: "Get Quote",
+            models: "Models"
+        },
+        modelsPage: {
+            title: "Premium Models",
+            subtitle: "Discover our exclusive collection of world-class kitchen systems and surfaces.",
+            kitchens: {
+                title: "Kitchen Systems",
+                egger: { title: "EGGER German Kitchens", finish: "Matte & Wooden Finish", origin: "Germany", features: ["European Quality", "Durable", "Antibacterial"] },
+                glossy: { title: "High Glossy Kitchens", finish: "Acrylic / PU", origin: "Turkey", features: ["Mirror-like Finish", "Scratch Resistant", "Vibrant Colors"] },
+                multiwood: { title: "Multiwood Kitchens", finish: "Waterproof WPC/WPVC", origin: "China/India", features: ["100% Waterproof", "Termite Proof", "Long-lasting"] },
+                pvc: { title: "PVC Classic Kitchens", finish: "Semi-gloss", origin: "Spain", features: ["Budget Friendly", "Elegant Designs", "Easy Maintenance"] },
+                aluminium: { title: "Aluminium Modular", finish: "Matte / Metallic", origin: "Global", features: ["Rust Proof", "Fire Resistant", "Structural Strength"] },
+                viewDetails: "View Details"
+            },
+            countertops: {
+                title: "Premium Countertops",
+                korean: { title: "Korean Solid Surface", desc: "Seamless, non-porous surfaces perfect for hygiene and durability." },
+                quartz: { title: "Engineered Quartz", desc: "Consistent patterns with extreme hardness and stain resistance." },
+                porcelain: { title: "Porcelain Surfaces", desc: "Heat, scratch, and UV resistant suitable for heavy use." },
+                granite: { title: "Natural Granite", desc: "Timeless beauty with unique natural patterns and high durability." }
+            },
+            washCounters: {
+                title: "Wash Counters",
+                koreanbox: { title: "Korean Solid Surface Wash Counters", desc: "Seamless integrated sinks with custom sizing and hygienic finish." }
+            }
+
         },
         hero: {
             titlePart1: "Elevate your lifestyle with Axora Kitchens Interiors —",
@@ -37,10 +63,12 @@ export const translations = {
         products: {
             title: "Our Collections",
             subtitle: "Discover our range of premium interior solutions.",
-            kitchens: { title: "Kitchens", short: "Open-plan designs featuring grand islands and breakfast bars.", desc: "Experience the heart of the home reimagined. Our open-plan kitchens feature grand marble islands, state-of-the-art appliances, and ergonomic layouts." },
-            wardrobes: { title: "Wardrobes", short: "Bespoke storage solutions with glass fronts and integrated lighting.", desc: "Transform your daily routine with our bespoke wardrobe systems. Featuring floor-to-ceiling glass fronts and automated internal lighting." },
-            living: { title: "Living", short: "Comfortable, stylish living room setups tailored to your needs.", desc: "Create a sanctuary of comfort and style. Our living room solutions blend modular shelving and warm wood accents." },
-            bath: { title: "Bath", short: "Luxurious bathroom interiors for your personal spa experience.", desc: "Indulge in the tranquility of a personal spa. Our bathroom interiors combine waterproof engineered woods and natural stone." },
+            kitchens: { title: "Kitchen", short: "Open-plan designs featuring grand islands.", desc: "Experience the heart of the home reimagined." },
+            countertops: { title: "Counter Top", short: "Premium surfaces for your dream kitchen.", desc: "Korean, Quartz, Porcelain, and Granite options." },
+            washCounters: { title: "Wash Counter", short: "Hygienic and effortless design.", desc: "Seamless integrated sinks and surfaces." },
+            wardrobes: { title: "Wardrobe", short: "Bespoke storage solutions.", desc: "Transform your daily routine." },
+            living: { title: "Living", short: "Comfortable, stylish living setups.", desc: "Create a sanctuary of comfort and style." },
+
             viewDetails: "View Details",
             viewGallery: "View Gallery",
             quickView: "Quick View",
@@ -67,12 +95,6 @@ export const translations = {
                 warrantyValue: "10-Year Guarantee",
                 request: "Request Consultation"
             },
-            threeD: {
-                enabled: "3D Enabled",
-                view: "View",
-                loaded: "3D Configurator Loaded",
-                ready: "Interactive 3D view is ready."
-            }
         },
         gallery: {
             title: "Curated Interiors",
@@ -154,7 +176,33 @@ export const translations = {
             services: "خدماتنا",
             products: "منتجاتنا",
             contact: "اتصل بنا",
-            getQuote: "اطلب عرض سعر"
+            getQuote: "اطلب عرض سعر",
+            models: "الموديلات"
+        },
+        modelsPage: {
+            title: "موديلات فاخرة",
+            subtitle: "اكتشف مجموعتنا الحصرية من أنظمة المطابخ والأسطح عالمية المستوى.",
+            kitchens: {
+                title: "أنظمة المطابخ",
+                egger: { title: "مطابخ إيجر الألمانية", finish: "لمسة خشبية ومات", origin: "ألمانيا", features: ["جودة أوروبية", "متينة", "مضادة للبكتيريا"] },
+                glossy: { title: "مطابخ هاي جلوس", finish: "أكريليك / بي يو", origin: "تركيا", features: ["لمعان كالمرآة", "مقاومة للخدش", "ألوان زاهية"] },
+                multiwood: { title: "مطابخ مالتي وود", finish: "WPC/WPVC مقاوم للماء", origin: "الصين/الهند", features: ["مقاوم للماء 100%", "مقاوم للنمل الأبيض", "طويل الأمد"] },
+                pvc: { title: "مطابخ بي في سي كلاسيك", finish: "شبه لامع", origin: "إسبانيا", features: ["اقتصادي", "تصاميم أنيقة", "سهل الصيانة"] },
+                aluminium: { title: "مطابخ ألمنيوم", finish: "مات / معدني", origin: "عالمي", features: ["مقاوم للصدأ", "مقاوم للحريق", "قوة هيكلية"] },
+                viewDetails: "عرض التفاصيل"
+            },
+            countertops: {
+                title: "الأسطح الفاخرة",
+                korean: { title: "سطح صلب كوري", desc: "أسطح غير مسامية وسلسة مثالية للنظافة والمتانة." },
+                quartz: { title: "كوارتز هندسي", desc: "أنماط متسقة مع صلابة شديدة ومقاومة للبقع." },
+                porcelain: { title: "أسطح بورسلين", desc: "مقاومة للحرارة والخدش والأشعة فوق البنفسجية للاستخدام الشاق." },
+                granite: { title: "جرانيت طبيعي", desc: "جمال خالد مع أنماط طبيعية فريدة ومتانة عالية." }
+            },
+            washCounters: {
+                title: "مغاسل",
+                koreanbox: { title: "مغاسل سطح صلب كوري", desc: "أحواض مدمجة بسلاسة مع مقاسات مخصصة وتشطيب صحي." }
+            }
+
         },
         hero: {
             titlePart1: "ارتقِ بأسلوب حياتك مع",
@@ -185,10 +233,12 @@ export const translations = {
         products: {
             title: "مجموعاتنا",
             subtitle: "اكتشف مجموعتنا من الحلول الداخلية الفاخرة.",
-            kitchens: { title: "المطابخ", short: "تصاميم مفتوحة تتميز بجزر كبيرة وبارات إفطار.", desc: "جرب قلب المنزل بتصور جديد. تتميز مطابخنا المفتوحة بجزر رخامية كبيرة، وأجهزة حديثة، وتخطيطات مريحة لكل من الطهاة والضيوف." },
-            wardrobes: { title: "الخزائن", short: "حلول تخزين مخصصة بواجهات زجاجية وإضاءة مدمجة.", desc: "حول روتينك اليومي مع أنظمة الخزائن المخصصة لدينا. تتميز بارتفاع من الأرض إلى السقف، واجهات زجاجية، وإضاءة داخلية آلية." },
-            living: { title: "المعيشة", short: "غرف معيشة مريحة وأنيقة مصممة حسب احتياجاتك.", desc: "اصنع ملاذاً من الراحة والأناقة. تمزج حلول غرف المعيشة لدينا بين الأرفف المعيارية ولمسات الخشب الدافئ لخلق جمالية متماسكة." },
-            bath: { title: "الحمام", short: "تصاميم حمامات فاخرة لتجربة السبا في منزلك.", desc: "انغمس في هدوء السبا الشخصي. تجمع تصاميمنا بين الأخشاب المعالجة المقاومة للماء والأحجار الطبيعية لخلق بيئة هادئة." },
+            kitchens: { title: "المطبخ", short: "تصاميم مفتوحة بجزر كبيرة.", desc: "جرب قلب المنزل بتصور جديد." },
+            countertops: { title: "أسطح العمل", short: "أسطح فاخرة لمطبخ أحلامك.", desc: "خيارات كورية، كوارتز، بورسلين، وجرانيت." },
+            washCounters: { title: "المغاسل", short: "تصميم صحي وسلس.", desc: "أحواض وأسطح مدمجة بسلاسة." },
+            wardrobes: { title: "الخزائن", short: "حلول تخزين مخصصة.", desc: "حول روتينك اليومي بأناقة." },
+            living: { title: "المعيشة", short: "غرف معيشة مريحة وأنيقة.", desc: "اصنع ملاذاً من الراحة والأناقة." },
+
             viewDetails: "عرض التفاصيل",
             viewGallery: "عرض المعرض",
             quickView: "نظرة سريعة",
@@ -214,12 +264,6 @@ export const translations = {
                 warranty: "الضمان",
                 warrantyValue: "ضمان 10 سنوات",
                 request: "طلب استشارة"
-            },
-            threeD: {
-                enabled: "ثلاثي الأبعاد متاح",
-                view: "عرض",
-                loaded: "تم تحميل المصمم ثلاثي الأبعاد",
-                ready: "العرض التفاعلي ثلاثي الأبعاد جاهز."
             }
         },
         gallery: {

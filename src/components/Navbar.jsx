@@ -34,38 +34,40 @@ const Navbar = () => {
         >
             <div className="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tight text-text-main">
-                    <div className="relative w-16 h-16">
+                    <div className="relative w-32 h-12 md:w-40 md:h-16" style={{ filter: 'grayscale(100%) brightness(0.5)' }}>
                         <Image
                             src={logo}
                             alt="AxoraKitchens Logo"
                             fill
-                            className="object-contain"
+                            className="object-contain object-left"
                             priority
+                            sizes="(max-width: 768px) 128px, 160px"
                         />
                     </div>
                 </Link>
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
-                    <Link href="/#home" className="text-sm font-medium text-text-muted hover:text-text-main transition-colors relative group">
+                    <Link href="/#home" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-accent transition-all relative group">
                         {t.home}
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-text-main transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full"></span>
                     </Link>
-                    <Link href="/#about" className="text-sm font-medium text-text-muted hover:text-text-main transition-colors relative group">
+                    <Link href="/#about" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-accent transition-all relative group">
                         {t.about}
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-text-main transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full"></span>
                     </Link>
-                    <Link href="/#services" className="text-sm font-medium text-text-muted hover:text-text-main transition-colors relative group">
+                    <Link href="/#services" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-accent transition-all relative group">
                         {t.services}
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-text-main transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full"></span>
                     </Link>
-                    <Link href="/#products" className="text-sm font-medium text-text-muted hover:text-text-main transition-colors relative group">
+                    <Link href="/#products" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-accent transition-all relative group">
                         {t.products}
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-text-main transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full"></span>
                     </Link>
-                    <Link href="/#contact" className="text-sm font-medium text-text-muted hover:text-text-main transition-colors relative group">
+
+                    <Link href="/#contact" className="text-sm font-medium opacity-80 hover:opacity-100 hover:text-accent transition-all relative group">
                         {t.contact}
-                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-text-main transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full"></span>
                     </Link>
                 </div>
 
@@ -92,10 +94,10 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Menu Toggle */}
-                <div className="flex md:hidden flex-col gap-1.5 cursor-pointer" onClick={toggleMenu}>
-                    <span className={`w-6 h-0.5 bg-text-main transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-                    <span className={`w-6 h-0.5 bg-text-main transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                    <span className={`w-6 h-0.5 bg-text-main transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+                <div className="flex md:hidden flex-col gap-1.5 cursor-pointer text-current" onClick={toggleMenu}>
+                    <span className={`w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+                    <span className={`w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                    <span className={`w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
                 </div>
             </div>
 
@@ -109,6 +111,7 @@ const Navbar = () => {
                 <Link href="/#about" onClick={() => setIsMenuOpen(false)} className="text-base font-medium text-text-muted hover:text-text-main">{t.about}</Link>
                 <Link href="/#services" onClick={() => setIsMenuOpen(false)} className="text-base font-medium text-text-muted hover:text-text-main">{t.services}</Link>
                 <Link href="/#products" onClick={() => setIsMenuOpen(false)} className="text-base font-medium text-text-muted hover:text-text-main">{t.products}</Link>
+
                 <Link href="/#contact" onClick={() => setIsMenuOpen(false)} className="text-base font-medium text-text-muted hover:text-text-main">{t.contact}</Link>
                 <div className="flex flex-col gap-4 mt-2">
                     <div className="flex items-center justify-between">

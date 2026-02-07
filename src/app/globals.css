@@ -5,27 +5,29 @@ html {
 }
 
 :root {
-  /* Default to Dark Luxury Theme directly */
-  --background: #3A3A3C;
-  /* Charcoal Grey */
-  --foreground: #EDEDED;
-  /* Warm Off-white */
+  /* Luxury Beige & Brown Theme */
+  --background: #F5F5DC;
+  /* Beige */
+  --foreground: #3E2723;
+  /* Dark Brown Text */
 
-  /* Custom Colors - Mapped to Brand Palette */
-  --bg-primary: #3A3A3C;
-  /* Charcoal Grey - Main Background */
-  --bg-secondary: #251501;
-  /* Deep Espresso Brown - Secondary/Cards */
-  --text-main: #EDEDED;
-  /* Warm Off-white */
-  --text-muted: #D1D1D1;
-  /* Lightened Grey for better contrast on Charcoal */
+  /* Custom Colors */
+  --bg-primary: #F5F5DC;
+  /* Beige - Main Background */
+  --bg-secondary: #FFFFFF;
+  /* White - Cards/Contrast */
+  --text-main: #3E2723;
+  /* Dark Brown */
+  --text-muted: #5D4037;
+  /* Muted Brown */
+  --text-inverse: #F5F5DC;
+  /* Light text (if needed) */
   --accent: #FBD264;
   /* Warm Gold */
-  --accent-hover: #FCE28C;
-  /* Brightened Gold */
-  --border: #525252;
-  /* Lighter Grey for separators on Charcoal */
+  --accent-hover: #D4B04C;
+  /* Darker Gold */
+  --border: #D7CCC8;
+  /* Light Border */
 
   --header-height: 80px;
 }
@@ -48,17 +50,25 @@ html {
   --spacing-header: var(--header-height);
 }
 
-/* Enforce dark mode variables always since this is a dark-only site now */
+/* Enforce beige theme variables always */
+/* Enforce beige theme variables always */
 .dark {
-  --background: #3A3A3C;
-  --foreground: #EDEDED;
-  --bg-primary: #3A3A3C;
-  --bg-secondary: #251501;
-  --text-main: #EDEDED;
-  --text-muted: #D1D1D1;
+  --background: #F5F5DC;
+  /* Beige */
+  --foreground: #3E2723;
+  /* Dark Brown Text */
+  --bg-primary: #F5F5DC;
+  /* Beige */
+  --bg-secondary: #FFFFFF;
+  /* White */
+  --text-main: #3E2723;
+  /* Dark Brown */
+  --text-muted: #5D4037;
+  /* Muted Brown */
   --accent: #FBD264;
-  --accent-hover: #FCE28C;
-  --border: #525252;
+  --accent-hover: #D4B04C;
+  --border: #D7CCC8;
+  /* Light Border */
 
   /* Typography - Using Oswald as DRUGS TRAIL substitute */
   --font-heading: var(--font-oswald);
