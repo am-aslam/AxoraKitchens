@@ -88,7 +88,7 @@ const Contact = () => {
     );
   };
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
 
     // Prevent duplicate sends
