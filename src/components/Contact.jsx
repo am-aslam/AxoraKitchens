@@ -113,67 +113,82 @@ const Contact = () => {
     setIsSubmitting(true);
 
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const subject = `Meeting Request / Inquiry – AxoraKitchens Studio`;
 
-    const body = `Dear AxoraKitchens Studio Team,
+    // --- EMAILJS CONFIGURATION ---
+    // Please replace these with your actual IDs from emailjs.com
+    const SERVICE_ID = "YOUR_SERVICE_ID";
+    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+    // -----------------------------
 
-I am reaching out through your website to submit a meeting request and general inquiry.
+    const templateParams = {
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: `${countryCode} ${formData.phone}`,
+      category: category,
+      duration: duration,
+      date: `${monthName.split(" ")[0]} ${selectedDate}`,
+      time: selectedTime,
+      timeZone: timeZone,
+      to_email: "info@axorakitchens.com", // You can also set this in the EmailJS dashboard
+    };
 
----
+    try {
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: SERVICE_ID,
+          template_id: TEMPLATE_ID,
+          user_id: PUBLIC_KEY,
+          template_params: templateParams,
+        }),
+      });
 
-My Details
-Full Name: ${formData.fullName}
-Email Address: ${formData.email}
-Phone Number: ${countryCode} ${formData.phone}
+      if (response.ok) {
+        // Show Success
+        setFeedback({
+          show: true,
+          type: "success",
+          message: t.successMessage || "Your request has been sent successfully! We will contact you soon.",
+        });
 
----
+        // Reset Form
+        setFormData({ fullName: "", email: "", phone: "" });
+        setSelectedDate(null);
+        setSelectedTime(null);
+        setCategory(t.categories.general);
+        setDuration(30);
+      } else {
+        const errorData = await response.text();
+        throw new Error(errorData || "Failed to send email.");
+      }
+    } catch (error) {
+      console.error("EmailJS Error:", error);
 
-Inquiry & Meeting Preferences
-Category: ${category}
-Meeting Type: Online / In-Person
-Preferred Meeting Duration: ${duration} minutes
+      // Fallback to mailto if EmailJS is not configured or fails
+      if (SERVICE_ID === "YOUR_SERVICE_ID") {
+        const subject = `Meeting Request – AxoraKitchens Studio`;
+        const body = `Name: ${formData.fullName}\nEmail: ${formData.email}\nPhone: ${countryCode} ${formData.phone}\nDate: ${monthName.split(" ")[0]} ${selectedDate}\nTime: ${selectedTime}`;
+        window.location.href = `mailto:info@axorakitchens.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
----
-
-Scheduling Information
-Preferred Date: ${monthName.split(" ")[0]} ${selectedDate}
-Preferred Time Slot: ${selectedTime}
-Time Zone: ${timeZone}
-
----
-
-Location (If In-Person)
-AxoraKitchens Studio
-Sib, Oman
-
----
-
-Thank you for your time. I look forward to your response.
-
-Kind regards,
-${formData.fullName}
-${formData.email}
-${countryCode} ${formData.phone}`;
-
-    const mailtoLink = `mailto:info@axorakitchens.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Open Mail Client
-    window.location.href = mailtoLink;
-
-    // Show Success & Clear Form
-    setFeedback({
-      show: true,
-      type: "success",
-      message: t.emailOpened || "Opening email client...",
-    });
-
-    // Reset Form
-    setFormData({ fullName: "", email: "", phone: "" });
-    setSelectedDate(null);
-    setSelectedTime(null);
-    setCategory(t.categories.general);
-    setDuration(30);
-    setIsSubmitting(false);
+        setFeedback({
+          show: true,
+          type: "success",
+          message: "Opening your email client to send the request...",
+        });
+      } else {
+        setFeedback({
+          show: true,
+          type: "error",
+          message: "Sorry, something went wrong. Please try again or call us directly.",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
