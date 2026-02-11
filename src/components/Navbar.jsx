@@ -131,9 +131,13 @@ const Navbar = () => {
                         </div>
 
                     </div>
-                    <button className="w-full inline-flex items-center justify-center px-7 py-3.5 rounded-md bg-accent text-bg-primary border border-accent font-medium text-sm uppercase tracking-wider">
+                    <Link
+                        href="/#contact"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="w-full inline-flex items-center justify-center px-7 py-3.5 rounded-md bg-accent text-bg-primary border border-accent font-medium text-sm uppercase tracking-wider"
+                    >
                         {t.getQuote}
-                    </button>
+                    </Link>
                 </div>
             </div>
         </nav>

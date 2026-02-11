@@ -70,7 +70,7 @@ export default function ModelDetail({ params }) {
         <section className="pt-32 pb-20 min-h-screen bg-white">
             <div className="max-w-[1400px] mx-auto px-6">
                 <Link href={`/categories/${model.type}`} className="inline-flex items-center text-text-muted hover:text-text-main mb-8 transition-colors">
-                    <ArrowLeft size={20} className="mr-2" /> Back to {model.category}s
+                    <ArrowLeft size={20} className="mr-2" /> Back to {content.category}s
                 </Link>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
@@ -144,15 +144,23 @@ export default function ModelDetail({ params }) {
 
                     <div className="flex flex-col justify-center">
                         <div className="mb-6">
-                            <span className="inline-block px-3 py-1 bg-bg-secondary text-xs font-bold uppercase tracking-widest text-text-muted rounded-full mb-4">{model.category}</span>
-                            <h1 className="text-4xl lg:text-5xl font-bold text-text-main mb-6 tracking-tight">{model.title}</h1>
+                            <span className="inline-block px-3 py-1 bg-bg-secondary text-xs font-bold uppercase tracking-widest text-text-muted rounded-full mb-4">{content.category}</span>
+                            <h1 className="text-4xl lg:text-5xl font-bold text-text-main mb-6 tracking-tight font-heading">{content.title}</h1>
+
+                            {/* Dynamic Quote Section */}
+                            {content.quote && (
+                                <blockquote className="text-xl md:text-2xl italic text-text-main/80 mb-8 border-l-4 border-accent pl-6 py-2 font-body leading-relaxed">
+                                    "{content.quote}"
+                                </blockquote>
+                            )}
+
                             <div className="flex items-center gap-1 mb-6">
                                 {[...Array(5)].map((_, i) => (
                                     <Star key={i} size={18} className="fill-accent text-accent" />
                                 ))}
                                 <span className="text-sm text-text-muted ml-2">(Popular Choice)</span>
                             </div>
-                            <p className="text-lg text-text-muted leading-relaxed mb-8 border-l-4 border-accent pl-6">
+                            <p className="text-lg text-text-muted leading-relaxed mb-8">
                                 {content.desc}
                             </p>
                         </div>

@@ -4,7 +4,7 @@ export const translations = {
             home: "Home",
             about: "About",
             services: "Services",
-            products: "Products",
+            products: "Our Designs",
             contact: "Contact",
             getQuote: "Get Quote",
             models: "Models"
@@ -174,7 +174,7 @@ export const translations = {
             home: "الرئيسية",
             about: "من نحن",
             services: "خدماتنا",
-            products: "منتجاتنا",
+            products: "تصاميمنا",
             contact: "اتصل بنا",
             getQuote: "اطلب عرض سعر",
             models: "الموديلات"

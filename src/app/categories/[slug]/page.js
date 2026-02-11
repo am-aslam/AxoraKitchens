@@ -97,19 +97,121 @@ const ModelCard = ({ id, model }) => {
 export default function CategoryPage({ params }) {
     const resolvedParams = use(params);
     const { slug } = resolvedParams;
-    const { language } = useLanguage();
+    const { language, direction } = useLanguage();
 
-    // Filter models
+    // Check if the slug matches a specific model ID directly
+    const specificModel = modelsData[slug];
+
+    if (specificModel) {
+        const content = specificModel[language] || specificModel.en;
+        const images = specificModel.images || [specificModel.image];
+        const [currentImage, setCurrentImage] = useState(0);
+
+        const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
+        const prevImage = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+
+        return (
+            <section className="pt-32 pb-20 min-h-screen bg-bg-primary">
+                <div className="max-w-[1400px] mx-auto px-6">
+                    <Link href="/" className="inline-flex items-center text-text-muted hover:text-text-main mb-8 transition-colors">
+                        <ArrowLeft size={20} className={`mr-2 ${language === 'ar' ? 'rotate-180 ml-2 mr-0' : ''}`} /> {language === 'ar' ? 'الرجوع' : 'Back'}
+                    </Link>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                        {/* Image Gallery */}
+                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg group">
+                            <Image
+                                src={images[currentImage]}
+                                alt={content.title}
+                                fill
+                                className="object-cover"
+                            />
+                            {images.length > 1 && (
+                                <>
+                                    <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full backdrop-blur-md transition-all">
+                                        <ChevronLeft size={24} />
+                                    </button>
+                                    <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full backdrop-blur-md transition-all">
+                                        <ChevronRight size={24} />
+                                    </button>
+                                </>
+                            )}
+                        </div>
+
+                        {/* Model Details */}
+                        <div>
+                            <span className="text-sm font-bold text-accent uppercase tracking-wider mb-2 block">{content.category}</span>
+                            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-heading text-text-main">{content.title}</h1>
+
+                            {content.quote && (
+                                <blockquote className="text-xl italic text-text-muted mb-6 border-l-4 border-accent pl-4 font-body">
+                                    "{content.quote}"
+                                </blockquote>
+                            )}
+
+                            <p className="text-lg text-text-muted mb-8 leading-relaxed max-w-xl">
+                                {content.desc}
+                            </p>
+
+                            <div className="bg-bg-secondary p-8 rounded-xl border border-border/10 mb-8">
+                                <h3 className="text-xl font-bold mb-4">{language === 'ar' ? 'المميزات' : 'Key Features'}</h3>
+                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {content.features?.map((feature, idx) => (
+                                        <li key={idx} className="flex items-center text-text-muted">
+                                            <div className="w-2 h-2 rounded-full bg-accent mr-3"></div>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <Link
+                                href="/#contact"
+                                className="inline-flex items-center justify-center gap-2 bg-accent text-bg-primary px-8 py-4 rounded-lg font-bold uppercase tracking-wider hover:opacity-90 transition-all w-full sm:w-auto text-center"
+                            >
+                                {language === 'ar' ? 'اطلب عرض سعر' : 'Request Quote'}
+                                <ArrowRight size={20} className={direction === 'rtl' ? 'rotate-180' : ''} />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    // Filter models for Category View
     const categoryModels = Object.entries(modelsData).filter(([key, data]) => data.type === slug);
 
-    if (categoryModels.length === 0) {
+    // Initial check for valid categories that don't have models yet
+    const specialCategories = ['wardrobes', 'living'];
+    // Only show the special details view if there are NO models available
+    const isSpecialCategory = specialCategories.includes(slug) && categoryModels.length === 0;
+
+    if (categoryModels.length === 0 && !isSpecialCategory) {
         return notFound();
     }
 
     const t = translations[language].categories || {};
-    const title = slug === 'kitchens' ? (language === 'ar' ? 'المطابخ' : 'Kitchens') :
-        slug === 'countertops' ? (language === 'ar' ? 'الأسطح' : 'Countertops') :
-            slug === 'wash-counters' ? (language === 'ar' ? 'المغاسل' : 'Wash Counters') : slug;
+    // Fallback to products translation for descriptions if needed
+    const tProducts = translations[language].products || {};
+
+    let title = slug;
+    let description = "";
+
+    // Title & Description Logic
+    if (slug === 'kitchens') {
+        title = language === 'ar' ? 'المطابخ' : 'Kitchens';
+    } else if (slug === 'countertops') {
+        title = language === 'ar' ? 'الأسطح' : 'Countertops';
+    } else if (slug === 'wash-counters') {
+        title = language === 'ar' ? 'المغاسل' : 'Wash Counters';
+    } else if (slug === 'wardrobes') {
+        title = tProducts.wardrobes?.title || (language === 'ar' ? 'الخزائن' : 'Wardrobes');
+        description = tProducts.wardrobes?.desc || "";
+    } else if (slug === 'living') {
+        title = tProducts.living?.title || (language === 'ar' ? 'غرف المعيشة' : 'Living Rooms');
+        description = tProducts.living?.desc || "";
+    }
 
     return (
         <section className="pt-32 pb-20 min-h-screen bg-bg-primary">
@@ -121,15 +223,38 @@ export default function CategoryPage({ params }) {
                 <div className="mb-16">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6 capitalize">{title}</h1>
                     <p className="text-text-muted max-w-2xl text-lg">
-                        {language === 'ar' ? 'استكشف مجموعتنا المتميزة.' : 'Explore our premium collection.'}
+                        {description || (language === 'ar' ? 'استكشف مجموعتنا المتميزة.' : 'Explore our premium collection.')}
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {categoryModels.map(([key, model]) => (
-                        <ModelCard key={key} id={key} model={model} />
-                    ))}
-                </div>
+                {isSpecialCategory ? (
+                    <div className="bg-bg-secondary rounded-2xl p-12 text-center border border-border/10 shadow-sm max-w-3xl mx-auto">
+                        <div className="mb-8">
+                            <h3 className="text-2xl font-bold mb-4 text-text-main">
+                                {language === 'ar' ? 'تصميم مخصص لك' : 'Tailored Design Solutions'}
+                            </h3>
+                            <p className="text-text-muted text-lg mb-8 leading-relaxed">
+                                {language === 'ar'
+                                    ? `استفسر الآن للحصول على تفاصيل أكثر حول ${title}. فريقنا مستعد لتصميم الحل الأمثل لمساحتك.`
+                                    : `Inquire now for more details about our ${title}. Our team is ready to design the perfect solution for your space.`
+                                }
+                            </p>
+                            <Link
+                                href="/#contact"
+                                className="inline-flex items-center justify-center gap-2 bg-accent text-bg-primary px-8 py-4 rounded-lg font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
+                            >
+                                {language === 'ar' ? 'اطلب استشارة' : 'Request Consultation'}
+                                <ArrowRight size={20} className={direction === 'rtl' ? 'rotate-180' : ''} />
+                            </Link>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {categoryModels.map(([key, model]) => (
+                            <ModelCard key={key} id={key} model={model} />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );
