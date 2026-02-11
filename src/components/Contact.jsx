@@ -117,7 +117,7 @@ const Contact = () => {
 
     const body = `Dear AxoraKitchens Studio Team,
 
-I hope this message finds you well. I am reaching out through your website to submit a meeting request and general inquiry. Please find my details and preferences below.
+I am reaching out through your website to submit a meeting request and general inquiry.
 
 ---
 
@@ -144,13 +144,11 @@ Time Zone: ${timeZone}
 
 Location (If In-Person)
 AxoraKitchens Studio
-Sib, Oman (See Map on Website)
+Sib, Oman
 
 ---
 
-I would appreciate your confirmation of availability or any further steps required from my side. Please feel free to contact me via email or phone if additional information is needed.
-
-Thank you for your time and consideration. I look forward to your response.
+Thank you for your time. I look forward to your response.
 
 Kind regards,
 ${formData.fullName}
@@ -166,7 +164,7 @@ ${countryCode} ${formData.phone}`;
     setFeedback({
       show: true,
       type: "success",
-      message: t.emailOpened || "Email client opened!",
+      message: t.emailOpened || "Opening email client...",
     });
 
     // Reset Form
@@ -654,19 +652,7 @@ ${countryCode} ${formData.phone}`;
               })}
             </div>
 
-            {/* Map Integration */}
-            <div className="mt-auto w-full h-[200px] rounded-lg overflow-hidden border border-border shadow-sm relative group">
-              <iframe
-                src="https://maps.google.com/maps?q=23.6773784,58.125394&z=15&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="filter grayscale hover:grayscale-0 transition-all duration-500"
-              ></iframe>
-            </div>
+            {/* Removed Map from here */}
           </div>
 
           {/* Right Panel: Time Slots */}
@@ -726,6 +712,44 @@ ${countryCode} ${formData.phone}`;
                 ))}
               </motion.div>
             )}
+          </div>
+        </motion.div>
+
+        {/* Location Map Section - Full Width and Color */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-12 w-full rounded-2xl overflow-hidden border-2 border-border shadow-2xl"
+        >
+          <div className="bg-bg-primary p-4 border-b border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h4 className="text-xl font-bold text-text-main flex items-center gap-2">
+                <Globe className="w-5 h-5 text-accent" />
+                Visit AxoraKitchens Studio
+              </h4>
+              <p className="text-text-muted text-sm">Our primary design hub in Sib, Oman</p>
+            </div>
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=23.6773784,58.125394"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-text-main text-bg-primary px-6 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-all flex items-center gap-2"
+            >
+              Get Directions
+            </a>
+          </div>
+          <div className="h-[400px] w-full relative group">
+            <iframe
+              src="https://maps.google.com/maps?q=23.6773784,58.125394&z=15&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full transition-all duration-500"
+            ></iframe>
           </div>
         </motion.div>
       </div>
