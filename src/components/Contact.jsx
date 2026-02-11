@@ -133,7 +133,16 @@ const Contact = () => {
       to_email: "info@axorakitchens.com", // You can also set this in the EmailJS dashboard
     };
 
+    // Check if keys are still placeholders
+    const isConfigured = SERVICE_ID !== "YOUR_SERVICE_ID" &&
+      TEMPLATE_ID !== "YOUR_TEMPLATE_ID" &&
+      PUBLIC_KEY !== "YOUR_PUBLIC_KEY";
+
     try {
+      if (!isConfigured) {
+        throw new Error("PLACEHOLDER_KEYS");
+      }
+
       const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
         headers: {
@@ -166,10 +175,8 @@ const Contact = () => {
         throw new Error(errorData || "Failed to send email.");
       }
     } catch (error) {
-      console.error("EmailJS Error:", error);
-
-      // Fallback to mailto if EmailJS is not configured or fails
-      if (SERVICE_ID === "YOUR_SERVICE_ID") {
+      if (error.message === "PLACEHOLDER_KEYS") {
+        // Silent fallback if keys are not yet provided
         const subject = `Meeting Request – AxoraKitchens Studio`;
         const body = `Name: ${formData.fullName}\nEmail: ${formData.email}\nPhone: ${countryCode} ${formData.phone}\nDate: ${monthName.split(" ")[0]} ${selectedDate}\nTime: ${selectedTime}`;
         window.location.href = `mailto:info@axorakitchens.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -180,6 +187,7 @@ const Contact = () => {
           message: "Opening your email client to send the request...",
         });
       } else {
+        console.error("EmailJS Error:", error);
         setFeedback({
           show: true,
           type: "error",
