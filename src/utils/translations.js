@@ -149,9 +149,11 @@ export const translations = {
             phone: "Phone Number",
             category: "Category",
             send: "Send Message",
+            sendWhatsApp: "Send via WhatsApp",
             sending: "Sending...",
             successTitle: "Message Sent",
             successMessage: "Your request has been sent successfully! We will contact you soon.",
+            successWhatsApp: "Opening WhatsApp to send your request...",
             errorTitle: "Error",
             categories: {
                 general: "General Inquiry",
@@ -320,9 +322,11 @@ export const translations = {
             phone: "رقم الهاتف",
             category: "الفئة",
             send: "إرسال الرسالة",
+            sendWhatsApp: "إرسال عبر واتساب",
             sending: "جاري الإرسال...",
             successTitle: "تم الإرسال",
             successMessage: "تم إرسال طلبك بنجاح! سنتواصل معك قريباً.",
+            successWhatsApp: "جاري فتح واتساب لإرسال طلبك...",
             errorTitle: "خطأ",
             categories: {
                 general: "استفسار عام",

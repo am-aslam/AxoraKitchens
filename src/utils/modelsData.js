@@ -1,6 +1,5 @@
 
 
-import marble from '@/assets/marble.png';
 
 // Egger images
 
@@ -77,8 +76,8 @@ import wardrobeImage1 from "../assets/Wardrobes/wardrop3.png";
 import wardrobeImage2 from "../assets/Wardrobes/wardrop2.png";
 
 // Living
-import living1 from '@/assets/Living/living1.png';
-
+import living1 from '@/assets/Living/living2.png';
+import living2 from '@/assets/Living/living3.png'
 
 
 
@@ -356,7 +355,7 @@ export const modelsData = {
     'living-modern': {
         type: "living",
         image: living1,
-        images: [living1, living1],
+        images: [living1, living2],
         price: 'Bespoke Design',
         en: {
             title: "Contemporary Living Area Suite",

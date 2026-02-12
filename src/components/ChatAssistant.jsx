@@ -41,7 +41,7 @@ const ChatAssistant = () => {
             } else if (lowerInput.includes('material') || lowerInput.includes('wood')) {
                 botResponse = "We use premium sustainable Oak, Walnut, and Italian Marble. You can view samples in our Gallery.";
             } else if (lowerInput.includes('location') || lowerInput.includes('where')) {
-                botResponse = "We are located at 123 Design District, New York. You can find us on the map in the Contact section.";
+                botResponse = "We are located in Sib, Oman. You can find our exact location on the map in the Contact section.";
             } else if (lowerInput.includes('appointment') || lowerInput.includes('book')) {
                 botResponse = "You can book a consultation directly through our Contact form below. We offer both online and in-person meetings.";
             } else if (lowerInput.includes('3d') || lowerInput.includes('design')) {

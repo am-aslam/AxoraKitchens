@@ -22,20 +22,20 @@ const Footer = () => {
                     <div>
                         <h4 className="text-text-main text-base font-bold mb-6 uppercase tracking-wider">{t.quickLinks}</h4>
                         <ul className="space-y-3">
-                            <li><Link href="#home" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.home}</Link></li>
-                            <li><Link href="#about" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.about}</Link></li>
-                            <li><Link href="#services" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.services}</Link></li>
-                            <li><Link href="#contact" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.contact}</Link></li>
+                            <li><Link href="/#home" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.home}</Link></li>
+                            <li><Link href="/#about" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.about}</Link></li>
+                            <li><Link href="/#services" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.services}</Link></li>
+                            <li><Link href="/#contact" className="text-text-muted hover:text-text-main transition-colors duration-300">{tNav.contact}</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-text-main text-base font-bold mb-6 uppercase tracking-wider">{t.collections}</h4>
                         <ul className="space-y-3">
-                            <li><Link href="#" className="text-text-muted hover:text-text-main transition-colors duration-300">Kitchens</Link></li>
-                            <li><Link href="#" className="text-text-muted hover:text-text-main transition-colors duration-300">Wardrobes</Link></li>
-                            <li><Link href="#" className="text-text-muted hover:text-text-main transition-colors duration-300">Living</Link></li>
-                            <li><Link href="#" className="text-text-muted hover:text-text-main transition-colors duration-300">Bath</Link></li>
+                            <li><Link href="/#products" className="text-text-muted hover:text-text-main transition-colors duration-300">Kitchens</Link></li>
+                            <li><Link href="/#products" className="text-text-muted hover:text-text-main transition-colors duration-300">Wardrobes</Link></li>
+                            <li><Link href="/#products" className="text-text-muted hover:text-text-main transition-colors duration-300">Living</Link></li>
+                            <li><Link href="/#products" className="text-text-muted hover:text-text-main transition-colors duration-300">Bath</Link></li>
                         </ul>
                     </div>
 

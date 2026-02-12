@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Globe,
   Calendar as CalendarIcon,
+  MessageCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
@@ -25,7 +26,7 @@ const Contact = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [duration, setDuration] = useState(30);
   const [countryCode, setCountryCode] = useState("+1");
-  const [category, setCategory] = useState(t.categories.general);
+  const [category, setCategory] = useState("general");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -88,7 +89,7 @@ const Contact = () => {
     );
   };
 
-  const handleSend = async (e) => {
+  const handleSend = (e) => {
     e.preventDefault();
 
     // Prevent duplicate sends
@@ -112,88 +113,49 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const whatsappNumber = "96895554577";
 
-    // --- EMAILJS CONFIGURATION ---
-    // Please replace these with your actual IDs from emailjs.com
-    const SERVICE_ID = "YOUR_SERVICE_ID";
-    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-    const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-    // -----------------------------
+    // Always use English for the sent message
+    const engT = translations.en.contact;
+    const monthNameEng = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric",
+    }).format(currentDate);
 
-    const templateParams = {
-      fullName: formData.fullName,
-      email: formData.email,
-      phone: `${countryCode} ${formData.phone}`,
-      category: category,
-      duration: duration,
-      date: `${monthName.split(" ")[0]} ${selectedDate}`,
-      time: selectedTime,
-      timeZone: timeZone,
-      to_email: "info@axorakitchens.com", // You can also set this in the EmailJS dashboard
-    };
+    const message = `*New Meeting Request - AxoraKitchens Studio*\n\n` +
+      `*Name:* ${formData.fullName}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Phone:* ${countryCode} ${formData.phone}\n` +
+      `*Service:* ${engT.categories[category] || category}\n` +
+      `*Duration:* ${duration} mins\n` +
+      `*Date:* ${monthNameEng.split(" ")[0]} ${selectedDate}\n` +
+      `*Time:* ${selectedTime}\n`;
 
-    // Check if keys are still placeholders
-    const isConfigured = SERVICE_ID !== "YOUR_SERVICE_ID" &&
-      TEMPLATE_ID !== "YOUR_TEMPLATE_ID" &&
-      PUBLIC_KEY !== "YOUR_PUBLIC_KEY";
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     try {
-      if (!isConfigured) {
-        throw new Error("PLACEHOLDER_KEYS");
-      }
+      window.open(whatsappUrl, "_blank");
 
-      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          service_id: SERVICE_ID,
-          template_id: TEMPLATE_ID,
-          user_id: PUBLIC_KEY,
-          template_params: templateParams,
-        }),
+      // Show Success
+      setFeedback({
+        show: true,
+        type: "success",
+        message: t.successWhatsApp || "Opening WhatsApp to send your request...",
       });
 
-      if (response.ok) {
-        // Show Success
-        setFeedback({
-          show: true,
-          type: "success",
-          message: t.successMessage || "Your request has been sent successfully! We will contact you soon.",
-        });
-
-        // Reset Form
-        setFormData({ fullName: "", email: "", phone: "" });
-        setSelectedDate(null);
-        setSelectedTime(null);
-        setCategory(t.categories.general);
-        setDuration(30);
-      } else {
-        const errorData = await response.text();
-        throw new Error(errorData || "Failed to send email.");
-      }
+      // Reset Form
+      setFormData({ fullName: "", email: "", phone: "" });
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setCategory(t.categories.general);
+      setDuration(30);
     } catch (error) {
-      if (error.message === "PLACEHOLDER_KEYS") {
-        // Silent fallback if keys are not yet provided
-        const subject = `Meeting Request – AxoraKitchens Studio`;
-        const body = `Name: ${formData.fullName}\nEmail: ${formData.email}\nPhone: ${countryCode} ${formData.phone}\nDate: ${monthName.split(" ")[0]} ${selectedDate}\nTime: ${selectedTime}`;
-        window.location.href = `mailto:info@axorakitchens.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-        setFeedback({
-          show: true,
-          type: "success",
-          message: "Opening your email client to send the request...",
-        });
-      } else {
-        console.error("EmailJS Error:", error);
-        setFeedback({
-          show: true,
-          type: "error",
-          message: "Sorry, something went wrong. Please try again or call us directly.",
-        });
-      }
+      console.error("WhatsApp Error:", error);
+      setFeedback({
+        show: true,
+        type: "error",
+        message: "Sorry, something went wrong. Please try again or call us directly.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -572,18 +534,19 @@ const Contact = () => {
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full px-3 py-2 text-sm border border-border rounded-md focus:ring-1 focus:ring-text-main outline-none bg-bg-primary text-text-main"
                   >
-                    <option>{t.categories.general}</option>
-                    <option>{t.categories.kitchen}</option>
-                    <option>{t.categories.wardrobe}</option>
-                    <option>{t.categories.living}</option>
+                    {Object.entries(t.categories).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {value}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <button
                   className="w-full bg-text-main text-bg-primary font-medium py-3 px-4 rounded-md text-sm hover:opacity-90 transition-colors shadow-lg flex items-center justify-center gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? t.sending : t.send}{" "}
-                  <Mail
+                  {isSubmitting ? t.sending : t.sendWhatsApp}{" "}
+                  <MessageCircle
                     size={16}
                     className={direction === "rtl" ? "rotate-180" : ""}
                   />
