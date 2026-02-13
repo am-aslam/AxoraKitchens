@@ -6,14 +6,14 @@ import Image from 'next/image';
 import { ArrowLeft, X, ChevronLeft, ChevronRight, Maximize } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import heroImage from '../../../assets/hero.png';
-import wardrobeImage from '../../../assets/wardrobe.png';
-import marbleImage from '../../../assets/marble.png';
-import accessoriesImage from '../../../assets/accessories.png';
-import kitchen1 from '../../../assets/kitchen_1.png';
-import kitchen2 from '../../../assets/kitchen_2.png';
-import livingImage from '../../../assets/living.png';
-import bathImage from '../../../assets/bath.png';
+import heroImage from '@/assets/hero.png';
+import wardrobeImage from '@/assets/wardrobe.png';
+import marbleImage from '@/assets/marble.png';
+import accessoriesImage from '@/assets/accessories.png';
+import kitchen1 from '@/assets/kitchen_1.png';
+import kitchen2 from '@/assets/kitchen_2.png';
+import livingImage from '@/assets/living.png';
+import bathImage from '@/assets/bath.png';
 
 // Generate more images for density
 const generateImages = (baseImages) => {
