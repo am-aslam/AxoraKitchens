@@ -170,6 +170,21 @@ export const translations = {
             privacy: "Privacy Policy",
             terms: "Terms of Service",
             rights: "All rights reserved."
+        },
+        speciality: {
+            bannerTitle: "Why Clients Trust Us",
+            title: "Our Speciality",
+            subtitle: "Experience unmatched service, precision, and long-term reliability with every project.",
+            cta: "Book Free 3D Design Consultation",
+            features: {
+                design: { title: "FREE 3D Designing Service", desc: "Visualize your dream kitchen or interior before execution with detailed 3D previews at no extra cost." },
+                warranty: { title: "10 Years Warranty", desc: "Built for durability and long-term performance, backed by a reliable 10-year warranty." },
+                vat: { title: "VAT On Us", desc: "Enjoy transparent pricing — we cover the VAT so you don’t have to pay extra." },
+                inspection: { title: "Site Inspection", desc: "Professional on-site measurements and consultation to ensure precision and perfection." },
+                speed: { title: "Design & Quote Within No Time", desc: "Fast turnaround on concepts and quotations without compromising quality." },
+                delivery: { title: "Free Delivery", desc: "Safe and secure delivery to your location at zero additional cost." },
+                installation: { title: "Free Installation With Quality Work", desc: "Expert installation by trained professionals ensuring flawless finishing." }
+            }
         }
     },
     ar: {
@@ -343,6 +358,21 @@ export const translations = {
             privacy: "سياسة الخصوصية",
             terms: "شروط الخدمة",
             rights: "جميع الحقوق محفوظة."
+        },
+        speciality: {
+            bannerTitle: "لماذا يثق بنا العملاء",
+            title: "تخصصنا",
+            subtitle: "اختبر خدمة لا مثيل لها، ودقة، وموثوقية طويلة الأمد مع كل مشروع.",
+            cta: "احجز استشارة تصميم ثلاثية الأبعاد مجانية",
+            features: {
+                design: { title: "خدمة تصميم ثلاثي الأبعاد مجانية", desc: "تصور مطبخ أحلامك أو مساحتك الداخلية قبل التنفيذ مع معاينات ثلاثية الأبعاد مفصلة دون تكلفة إضافية." },
+                warranty: { title: "ضمان 10 سنوات", desc: "مصمم للمتانة والأداء طويل الأمد، مدعوم بضمان موثوق لمدة 10 سنوات." },
+                vat: { title: "الضريبة علينا", desc: "استمتع بأسعار شفافة — نحن نغطي ضريبة القيمة المضافة حتى لا تضطر للدفع." },
+                inspection: { title: "معاينة الموقع", desc: "قياسات واستشارات احترافية في الموقع لضمان الدقة والكمال." },
+                speed: { title: "تصميم وعرض سعر سريع", desc: "إنجاز سريع للمفاهيم وعروض الأسعار دون المساومة على الجودة." },
+                delivery: { title: "توصيل مجاني", desc: "توصيل آمن ومضمون لموقعك دون أي تكلفة إضافية." },
+                installation: { title: "تركيب مجاني بجودة عالية", desc: "تركيب احترافي من قبل فنيين مدربين لضمان تشطيب لا تشوبه شائبة." }
+            }
         }
     }
 };

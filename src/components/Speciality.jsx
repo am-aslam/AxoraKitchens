@@ -12,53 +12,58 @@ import {
     Truck,
     Wrench
 } from 'lucide-react';
-
-const features = [
-    {
-        icon: Box,
-        title: "FREE 3D Designing Service",
-        description: "Visualize your dream kitchen or interior before execution with detailed 3D previews at no extra cost.",
-        delay: 0.1
-    },
-    {
-        icon: ShieldCheck,
-        title: "10 Years Warranty",
-        description: "Built for durability and long-term performance, backed by a reliable 10-year warranty.",
-        delay: 0.2
-    },
-    {
-        icon: BadgePercent,
-        title: "VAT On Us",
-        description: "Enjoy transparent pricing — we cover the VAT so you don’t have to pay extra.",
-        delay: 0.3
-    },
-    {
-        icon: Ruler,
-        title: "Site Inspection",
-        description: "Professional on-site measurements and consultation to ensure precision and perfection.",
-        delay: 0.4
-    },
-    {
-        icon: Clock,
-        title: "Design & Quote Within No Time",
-        description: "Fast turnaround on concepts and quotations without compromising quality.",
-        delay: 0.5
-    },
-    {
-        icon: Truck,
-        title: "Free Delivery",
-        description: "Safe and secure delivery to your location at zero additional cost.",
-        delay: 0.6
-    },
-    {
-        icon: Wrench,
-        title: "Free Installation With Quality Work",
-        description: "Expert installation by trained professionals ensuring flawless finishing.",
-        delay: 0.7
-    }
-];
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/utils/translations';
 
 const Speciality = () => {
+    const { language } = useLanguage();
+    const t = translations[language]?.speciality || translations['en'].speciality;
+
+    const features = [
+        {
+            icon: Box,
+            title: t.features.design.title,
+            description: t.features.design.desc,
+            delay: 0.1
+        },
+        {
+            icon: ShieldCheck,
+            title: t.features.warranty.title,
+            description: t.features.warranty.desc,
+            delay: 0.2
+        },
+        {
+            icon: BadgePercent,
+            title: t.features.vat.title,
+            description: t.features.vat.desc,
+            delay: 0.3
+        },
+        {
+            icon: Ruler,
+            title: t.features.inspection.title,
+            description: t.features.inspection.desc,
+            delay: 0.4
+        },
+        {
+            icon: Clock,
+            title: t.features.speed.title,
+            description: t.features.speed.desc,
+            delay: 0.5
+        },
+        {
+            icon: Truck,
+            title: t.features.delivery.title,
+            description: t.features.delivery.desc,
+            delay: 0.6
+        },
+        {
+            icon: Wrench,
+            title: t.features.installation.title,
+            description: t.features.installation.desc,
+            delay: 0.7
+        }
+    ];
+
     return (
         <section className="relative w-full bg-bg-primary overflow-hidden pb-24">
 
@@ -72,7 +77,7 @@ const Speciality = () => {
             >
                 <div className="max-w-[1400px] mx-auto px-6 text-center">
                     <h3 className="text-xl md:text-2xl font-heading text-text-main tracking-widest uppercase relative inline-block pb-3">
-                        Why Clients Trust Us
+                        {t.bannerTitle}
                         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-[1px] bg-accent"></span>
                     </h3>
                 </div>
@@ -89,7 +94,7 @@ const Speciality = () => {
                         transition={{ duration: 0.6 }}
                         className="text-4xl md:text-5xl font-bold font-heading text-text-main mb-6"
                     >
-                        Our Speciality
+                        {t.title}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -98,7 +103,7 @@ const Speciality = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-lg text-text-muted max-w-2xl mx-auto font-body leading-relaxed"
                     >
-                        Experience unmatched service, precision, and long-term reliability with every project.
+                        {t.subtitle}
                     </motion.p>
                 </div>
 
@@ -130,8 +135,8 @@ const Speciality = () => {
                         >
                             <span className="absolute inset-0 w-full h-full bg-accent/20 group-hover:bg-accent/30 transition-all duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left"></span>
                             <span className="relative z-10 flex items-center gap-2">
-                                Book Free 3D Design Consultation
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                                {t.cta}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transform group-hover:translate-x-1 transition-transform duration-300 ${language === 'ar' ? 'rotate-180' : ''}`}><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                             </span>
                         </Link>
                     </motion.div>
