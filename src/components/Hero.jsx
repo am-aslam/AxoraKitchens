@@ -36,7 +36,7 @@ const Hero = () => {
                                 <Link href="#products" className={`inline-flex items-center justify-center px-9 py-4 rounded-none bg-accent text-bg-primary border border-accent font-bold ${language === 'ar' ? 'text-sm' : 'text-[12px]'} hover:opacity-90 transition-all hover:-translate-y-0.5 shadow-md uppercase tracking-[0.2em] min-w-[180px]`}>
                                     {t.explore}
                                 </Link>
-                                <Link href="/#contact" className={`inline-flex items-center justify-center px-9 py-4 rounded-none bg-white/80 backdrop-blur text-text-main border border-white font-bold ${language === 'ar' ? 'text-sm' : 'text-[12px]'} hover:bg-white hover:scale-105 transition-all shadow-md uppercase tracking-[0.2em] min-w-[180px]`}>
+                                <Link href="/company-profile" className={`inline-flex items-center justify-center px-9 py-4 rounded-none bg-white/80 backdrop-blur text-text-main border border-white font-bold ${language === 'ar' ? 'text-sm' : 'text-[12px]'} hover:bg-white hover:scale-105 transition-all shadow-md uppercase tracking-[0.2em] min-w-[180px]`}>
                                     {t.quote}
                                 </Link>
                             </div>

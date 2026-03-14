@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/utils/translations';
@@ -50,6 +51,12 @@ const About = () => {
                                 <h4 className="text-2xl font-bold mb-3 text-text-main">{t.stats.awards}</h4>
                                 <p className="text-text-muted text-5xl font-bold text-accent">15+</p>
                             </div>
+                        </div>
+
+                        <div className="mt-8 flex justify-center lg:justify-start">
+                            <Link href="/company-profile" className={`inline-flex items-center justify-center px-8 py-4 bg-accent text-bg-primary font-bold hover:bg-text-main hover:text-white transition-all shadow-md hover:-translate-y-1 rounded-none uppercase tracking-wider ${language === 'ar' ? 'text-sm' : 'text-xs'}`}>
+                                {t.viewProfile}
+                            </Link>
                         </div>
                     </motion.div>
                 </div>

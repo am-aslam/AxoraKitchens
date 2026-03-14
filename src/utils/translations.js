@@ -39,7 +39,7 @@ export const translations = {
             titlePart2: "Premium Interiors",
             subtitle: "Experience the perfect blend of functionality and aesthetics with our bespoke modular kitchens and wardrobe systems.",
             explore: "Explore Collection",
-            quote: "Get Free Quote"
+            quote: "Start Your Experience"
         },
         about: {
             title: "Crafting Excellence",
@@ -47,10 +47,11 @@ export const translations = {
             description: "At AxoraKitchens, we combine heritage craftsmanship with cutting-edge technology to deliver interiors that truly stand the test of time. Every curve, every joint, and every finish is considered with a singular goal: perfection.",
             stats: {
                 years: "Years of Excellence",
-                projects: "Projects Completed",
+                projects: "Innovations Crafted",
                 awards: "Design Awards"
             },
-            cta: "Read Our Story"
+            cta: "Read Our Story",
+            viewProfile: "View Company Profile"
         },
         services: {
             title: "Our Expertise",
@@ -185,6 +186,67 @@ export const translations = {
                 delivery: { title: "Free Delivery", desc: "Safe and secure delivery to your location at zero additional cost." },
                 installation: { title: "Free Installation With Quality Work", desc: "Expert installation by trained professionals ensuring flawless finishing." }
             }
+        },
+        companyProfile: {
+            hero: {
+                title: "Axora Kitchen Experience Studio",
+                subtitle: "Kitchen design and execution studio based in Muscat, Oman delivering beautiful, functional, and durable kitchen solutions.",
+                cta: "Book Free 3D Design Consultation"
+            },
+            about: {
+                title: "About Axora",
+                description: "Axora is a kitchen design and execution studio focused on usability and a consultation-first approach.",
+                features: {
+                    design: "Design-led thinking",
+                    consultation: "Consultation-first approach",
+                    functional: "Functional beauty"
+                }
+            },
+            experience: {
+                success: "99% Customer Success",
+                years: "20+ Years Industry Experience",
+                installed: "Premium Bespoke Designs"
+            },
+            missionVision: {
+                missionTitle: "Mission",
+                missionDesc: "To transform houses into homes with innovative, durable, and breathtaking kitchen solutions tailored to individual lifestyles.",
+                visionTitle: "Vision",
+                visionDesc: "To be the premier kitchen design studio in the region, known for uncompromising quality and customer-centric design."
+            },
+            coreValues: {
+                customerFirst: "Customer-first service",
+                craftsmanship: "Craftsmanship & durable materials",
+                practical: "Practical design solutions"
+            },
+            services: {
+                title: "Products & Services",
+                customKitchen: "Custom Kitchen Design",
+                wardrobes: "Built-in Wardrobes",
+                washCounters: "Wash Counters",
+                countertops: "Countertops",
+                customization: "Full Customization"
+            },
+            materials: {
+                title: "Materials & Solutions",
+                cabinetsTitle: "Cabinet Materials",
+                cabinets: ["Egger", "PVC", "High Gloss", "Multiwood", "Aluminium Frames"],
+                countertopsTitle: "Countertops",
+                countertops: ["Quartz", "Porcelain", "Granite", "Korean Top"]
+            },
+            process: {
+                title: "Customer Journey",
+                steps: [
+                    { title: "Consultation" },
+                    { title: "Design" },
+                    { title: "Material Selection" },
+                    { title: "Installation" },
+                    { title: "After-Sales Support" }
+                ]
+            },
+            cta: {
+                title: "Start Your Kitchen Project Today",
+                button: "Get Free Design Consultation"
+            }
         }
     },
     ar: {
@@ -227,7 +289,7 @@ export const translations = {
             titlePart2: "تصاميم داخلية فاخرة",
             subtitle: "اكتشف المزيج المثالي بين الوظائف العملية والجماليات الساحرة مع مطابخنا العصرية وأنظمة الخزائن المصممة خصيصاً لك.",
             explore: "استكشف المجموعة",
-            quote: "عرض سعر مجاني"
+            quote: "ابدأ تجربتك"
         },
         about: {
             title: "صناعة التميز",
@@ -235,10 +297,11 @@ export const translations = {
             description: "في أكسورا كيتشنز، نجمع بين الحرفية التراثية والتكنولوجيا المتطورة لتقديم تصاميم داخلية تصمد أمام اختبار الزمن. كل منحنى، كل وصلة، وكل تشطيب مدروس بهدف واحد: الكمال.",
             stats: {
                 years: "سنوات من التميز",
-                projects: "مشاريع منجزة",
+                projects: "ابتكارات مصممة",
                 awards: "جوائز تصميم"
             },
-            cta: "اقرأ قصتنا"
+            cta: "اقرأ قصتنا",
+            viewProfile: "عرض ملف الشركة"
         },
         services: {
             title: "خبراتنا",
@@ -372,6 +435,67 @@ export const translations = {
                 speed: { title: "تصميم وعرض سعر سريع", desc: "إنجاز سريع للمفاهيم وعروض الأسعار دون المساومة على الجودة." },
                 delivery: { title: "توصيل مجاني", desc: "توصيل آمن ومضمون لموقعك دون أي تكلفة إضافية." },
                 installation: { title: "تركيب مجاني بجودة عالية", desc: "تركيب احترافي من قبل فنيين مدربين لضمان تشطيب لا تشوبه شائبة." }
+            }
+        },
+        companyProfile: {
+            hero: {
+                title: "استوديو أكسورا لتجربة المطابخ",
+                subtitle: "استوديو تصميم وتنفيذ المطابخ ومقره في مسقط، عمان، يقدم حلول مطابخ جميلة وعملية ومتينة.",
+                cta: "احجز استشارة تصميم ثلاثية الأبعاد مجانية"
+            },
+            about: {
+                title: "عن أكسورا",
+                description: "أكسورا هو استوديو لتصميم وتنفيذ المطابخ يركز على سهولة الاستخدام والنهج القائم على الاستشارة أولاً.",
+                features: {
+                    design: "تفكير يعتمد على التصميم",
+                    consultation: "نهج يعتمد على الاستشارة أولاً",
+                    functional: "جمال عملي"
+                }
+            },
+            experience: {
+                success: "99% نجاح مع العملاء",
+                years: "أكثر من 20 عاماً من الخبرة",
+                installed: "تصاميم فاخرة مخصصة"
+            },
+            missionVision: {
+                missionTitle: "رسالتنا",
+                missionDesc: "تحويل المنازل إلى بيوت من خلال حلول مطابخ مبتكرة ومتينة ومذهلة مصممة خصيصاً لتناسب أنماط الحياة الفردية.",
+                visionTitle: "رؤيتنا",
+                visionDesc: "أن نكون استوديو تصميم المطابخ الأول في المنطقة، المعروف بالجودة التي لا تقبل المساومة والتصميم الذي يركز على العميل."
+            },
+            coreValues: {
+                customerFirst: "خدمة العميل أولاً",
+                craftsmanship: "براعة حرفية ومواد متينة",
+                practical: "حلول تصميم عملية"
+            },
+            services: {
+                title: "المنتجات والخدمات",
+                customKitchen: "تصميم مطابخ مخصصة",
+                wardrobes: "خزائن حائط مدمجة",
+                washCounters: "مغاسل",
+                countertops: "أسطح رخامية",
+                customization: "تخصيص كامل"
+            },
+            materials: {
+                title: "المواد والحلول",
+                cabinetsTitle: "مواد الخزائن",
+                cabinets: ["إيجر", "بي في سي", "هاي جلوس", "مالتي وود", "إطارات ألمنيوم"],
+                countertopsTitle: "أسطح العمل",
+                countertops: ["كوارتز", "بورسلين", "جرانيت", "سطح كوري"]
+            },
+            process: {
+                title: "رحلة العميل",
+                steps: [
+                    { title: "الاستشارة" },
+                    { title: "التصميم" },
+                    { title: "اختيار المواد" },
+                    { title: "التركيب" },
+                    { title: "دعم ما بعد البيع" }
+                ]
+            },
+            cta: {
+                title: "ابدأ مشروع مطبخك اليوم",
+                button: "احصل على استشارة تصميم مجانية"
             }
         }
     }
