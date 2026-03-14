@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import heroImage from '../assets/hero-new.jpg';
+import heroImage from '../assets/premium-hero-kitchen.png';
 
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/utils/translations';
@@ -37,7 +37,7 @@ const Hero = () => {
             </div>
 
             {/* IMAGE MODULE: Right Center */}
-            <div className={`absolute ${direction === 'rtl' ? 'left-[5%] md:left-[10%] lg:left-[15%]' : 'right-[5%] md:right-[10%] lg:right-[15%]'} top-[25%] md:top-[12%] lg:top-[10%] bottom-[15%] md:bottom-[0] w-[90%] md:w-[50%] lg:w-[32%] z-10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl bg-[#EBE5D9]`}>
+            <div className={`absolute ${direction === 'rtl' ? 'left-[5%] md:left-[10%] lg:left-[15%]' : 'right-[5%] md:right-[10%] lg:right-[15%]'} top-[25%] md:top-[12%] lg:top-[10%] bottom-[15%] md:bottom-[0] w-[90%] md:w-[50%] lg:w-[32%] z-10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl bg-transparent`}>
                 <motion.div 
                     style={{ y: yTransform }}
                     className="relative w-full h-[120%]"
