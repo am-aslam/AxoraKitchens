@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import heroIsland from '../assets/kitchen-island-hero.png';
 
 import { useLanguage } from '@/context/LanguageContext';
@@ -20,131 +20,113 @@ const Hero = () => {
 
     if (!isMounted) return null;
 
+    // Editorial translation parsing for giant background text
+    const giantWord1 = language === 'ar' ? 'أكسورا' : 'axora';
+    const giantWord2 = language === 'ar' ? 'مطابخ' : 'kitchens';
+
     return (
-        <section className="relative min-h-[100dvh] w-full bg-[#F5F5DC] overflow-hidden flex items-center justify-center pt-[calc(var(--header-height)+2rem)] lg:pt-0" id="home">
+        <section className="relative min-h-[100dvh] w-full bg-[#F5F5DC] overflow-hidden text-[#3E2723] pt-[var(--header-height)] lg:pt-0" id="home">
             
-            {/* GIANT BACKGROUND TYPOGRAPHY (10% Opacity) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0 overflow-hidden select-none">
-                <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.1 }}
-                    transition={{ duration: 2, ease: "easeOut" }}
-                    className="flex flex-col items-center w-full"
-                >
-                    <h1 className="text-[18vw] leading-[0.75] font-heading font-bold text-[#3E2723] uppercase tracking-tighter mix-blend-multiply whitespace-nowrap">
-                        AXORA
-                    </h1>
-                    <h1 className="text-[18vw] leading-[0.75] font-heading font-bold text-[#3E2723] uppercase tracking-tighter mix-blend-multiply ml-[15vw] whitespace-nowrap">
-                        KITCHENS
-                    </h1>
-                    <h1 className="text-[18vw] leading-[0.75] font-heading font-bold text-[#3E2723] uppercase tracking-tighter mix-blend-multiply -ml-[10vw] whitespace-nowrap">
-                        INTERIORS
-                    </h1>
-                </motion.div>
+            {/* TOP BAR LABELS */}
+            <div className={`absolute top-[12%] lg:top-[8%] w-full px-[5%] lg:px-[8%] flex flex-col md:flex-row justify-between items-start md:items-center text-[9px] md:text-[10px] lg:text-[11px] font-semibold tracking-[0.2em] lg:tracking-[0.3em] uppercase text-[#5D4037]/60 z-30 ${direction === 'rtl' ? 'md:flex-row-reverse' : ''} gap-4 md:gap-0`}>
+                <div className="w-full md:w-1/3 text-left">
+                    <p>DESIGNED BY AXORA STUDIOS</p>
+                </div>
+                <div className="w-full md:w-1/3 text-center hidden md:block">
+                    <p>{t.titlePart2}</p>
+                </div>
+                <div className="w-full md:w-1/3 text-right hidden md:block">
+                    <p>LUXURY KITCHEN DESIGN<br/>EST. 2024</p>
+                </div>
             </div>
 
-            {/* MAIN CONTENT LAYOUT */}
-            <div className="relative z-10 max-w-[1600px] w-full mx-auto px-6 lg:px-12 flex flex-col lg:flex-row h-full min-h-[85vh] lg:items-center">
-                
-                {/* CENTER KITCHEN MODEL (Mobile: Top, Desktop: Center Absolute) */}
-                <div className="w-full lg:absolute lg:inset-0 flex justify-center items-center pointer-events-none z-10 order-1 lg:order-none mt-4 lg:mt-16">
-                    <motion.div 
-                        initial={{ scale: 0.95, opacity: 0, y: 30 }}
-                        animate={{ scale: 1, opacity: 1, y: [0, -10, 0] }}
-                        transition={{ 
-                            opacity: { duration: 1.5, ease: "easeOut" },
-                            scale: { duration: 1.5, ease: "easeOut" },
-                            y: { duration: 6, ease: "easeInOut", repeat: Infinity, delay: 1.5 } 
-                        }}
-                        className="relative w-full max-w-[900px] aspect-[4/3] mix-blend-multiply"
-                    >
-                        <Image
-                            src={heroIsland}
-                            alt="Premium Luxury Kitchen Island"
-                            fill
-                            className="object-contain drop-shadow-[0_45px_45px_rgba(62,39,35,0.2)]"
-                            priority
-                            quality={100}
-                        />
-                    </motion.div>
-                </div>
+            {/* GIANT TEXT 1: BEHIND IMAGE (Top Right) */}
+            <div className={`absolute top-[8%] md:top-[12%] lg:top-[8%] ${direction === 'rtl' ? 'left-[-15%] lg:left-[5%]' : 'right-[-15%] lg:right-[5%]'} z-0 w-[150%] md:w-full pointer-events-none flex ${direction === 'rtl' ? 'justify-start' : 'justify-end'} px-[5%]`}>
+                <motion.h1 
+                    initial={{ opacity: 0, x: direction === 'rtl' ? -50 : 50 }}
+                    animate={{ opacity: 0.1, x: 0 }}
+                    transition={{ duration: 1.5, delay: 0.1, ease: "easeOut" }}
+                    className="text-[120px] md:text-[200px] lg:text-[320px] font-heading font-medium tracking-tighter leading-none text-[#3E2723] drop-shadow-sm select-none mix-blend-multiply"
+                    style={{ textTransform: language === 'en' ? 'lowercase' : 'none' }}
+                >
+                    {giantWord1}
+                </motion.h1>
+            </div>
 
-                {/* LEFT TEXT (Headline & Top label) */}
-                <div className={`w-full lg:w-1/3 flex flex-col justify-center z-20 order-2 mt-8 lg:mt-0 ${direction === 'rtl' ? 'lg:items-end lg:text-right' : 'lg:items-start lg:text-left'} text-center`}>
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                        className={`flex items-center justify-center lg:justify-start gap-4 mb-6 w-full ${direction === 'rtl' ? 'flex-row-reverse' : 'flex-row'}`}
-                    >
-                        <span className="text-xs lg:text-sm font-bold tracking-[0.3em] uppercase text-accent">
-                            {t.titlePart2}
-                        </span>
-                        <div className="w-12 h-[1px] bg-accent/60 hidden lg:block" />
-                    </motion.div>
+            {/* GIANT TEXT 2: IN FRONT OF IMAGE (Mid Left to center) */}
+            <div className={`absolute top-[40%] md:top-[38%] lg:top-[35%] ${direction === 'rtl' ? 'right-[-10%] md:right-[0%]' : 'left-[-10%] md:left-[0%]'} z-20 pointer-events-none w-[150%] md:w-full flex px-[5%]`}>
+                <motion.h1 
+                    initial={{ opacity: 0, x: direction === 'rtl' ? 50 : -50 }}
+                    animate={{ opacity: 0.8, x: 0 }}
+                    transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
+                    className="text-[120px] md:text-[200px] lg:text-[320px] font-heading font-normal tracking-tighter leading-[0.85] text-white mix-blend-overlay select-none drop-shadow-2xl"
+                    style={{ textTransform: language === 'en' ? 'lowercase' : 'none' }}
+                >
+                    {giantWord2}
+                </motion.h1>
+            </div>
 
-                    <motion.h2 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-                        className="text-4xl md:text-5xl lg:text-[4rem] font-heading font-bold text-text-main leading-[1.05] tracking-tight whitespace-pre-line"
-                    >
-                        {language === 'en' ? (
-                            <>Elevate your lifestyle with<br/>Axora Kitchens Interiors</>
-                        ) : (
-                            t.titlePart1
-                        )}
-                    </motion.h2>
-
-                    {/* BUTTONS (Mobile: Bottom, Desktop: Left Under Headline) */}
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 1.1, ease: "easeOut" }}
-                        className={`hidden lg:flex flex-col sm:flex-row gap-5 mt-12 w-full ${direction === 'rtl' ? 'justify-end' : 'justify-start'}`}
-                    >
-                        <Link href="#products" className={`inline-flex items-center justify-center px-8 py-4 bg-accent text-[#F5F5DC] font-bold shadow-lg hover:shadow-[0_0_20px_rgba(251,210,100,0.6)] hover:-translate-y-1 transition-all duration-300 uppercase tracking-[0.2em] text-[10px] lg:text-xs min-w-[200px]`}>
-                            {t.explore}
-                        </Link>
-                        <Link href="/company-profile" className={`inline-flex items-center justify-center px-8 py-4 bg-transparent border border-text-main text-text-main hover:bg-text-main hover:text-[#F5F5DC] hover:shadow-[0_0_20px_rgba(62,39,35,0.2)] hover:-translate-y-1 transition-all duration-300 uppercase tracking-[0.2em] text-[10px] lg:text-xs min-w-[200px]`}>
-                            {t.quote}
-                        </Link>
-                    </motion.div>
-                </div>
-
-                {/* SPACER FOR ABSOLUTE IMAGE ON DESKTOP */}
-                <div className="hidden lg:block lg:w-1/3"></div>
-
-                {/* RIGHT TEXT (Subtitle Description) */}
-                <div className={`w-full lg:w-1/3 flex flex-col justify-end z-20 order-3 mt-8 lg:mt-0 ${direction === 'rtl' ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'} text-center pb-8 lg:pb-16`}>
-                    <motion.p 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
-                        className="text-sm md:text-base lg:text-[15px] font-bold text-text-muted leading-[1.8] font-body max-w-sm uppercase tracking-wider relative"
-                    >
-                        {/* Small divider line above paragraph on desktop */}
-                        <span className={`hidden lg:block absolute -top-6 w-12 h-[2px] bg-accent/30 ${direction === 'rtl' ? 'left-0' : 'right-0'}`} />
-                        {t.subtitle}
-                    </motion.p>
-                </div>
-
-                {/* MOBILE BUTTONS (Visible only on small screens) */}
-                <motion.div 
+            {/* TOP LEFT PARAGRAPH: HEADLINE (like "WEBSITE DESIGN FOR...") */}
+            <div className={`absolute top-[28%] md:top-[30%] lg:top-[25%] ${direction === 'rtl' ? 'right-[5%] md:right-[8%]' : 'left-[5%] md:left-[8%]'} z-30 w-[80%] md:w-[35%] lg:w-[25%]`}>
+                <motion.h2 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 1.1, ease: "easeOut" }}
-                    className="flex lg:hidden flex-col gap-4 mt-8 w-full z-20 order-4 pb-12"
+                    transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                    className="text-lg md:text-xl lg:text-2xl font-bold leading-[1.2] text-[#3E2723] uppercase tracking-tight mix-blend-multiply drop-shadow-sm"
                 >
-                    <Link href="#products" className="w-full inline-flex items-center justify-center px-8 py-5 bg-accent text-[#F5F5DC] font-bold shadow-lg uppercase tracking-[0.2em] text-xs">
+                    {language === 'en' ? t.titlePart1.replace(' —', '') : t.titlePart1}
+                </motion.h2>
+            </div>
+
+            {/* MID/BOTTOM RIGHT PARAGRAPH: SUBTITLE (like "THE MAIREN IS A...") */}
+            <div className={`absolute top-[65%] md:top-[60%] lg:top-[55%] ${direction === 'rtl' ? 'left-[5%] md:left-[8%]' : 'right-[5%] md:right-[8%]'} z-30 w-[80%] md:w-[35%] lg:w-[22%]`}>
+                <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+                    className={`text-[10px] md:text-[11px] lg:text-xs text-[#5D4037] font-bold uppercase tracking-[0.2em] leading-[1.8] ${direction === 'rtl' ? 'md:text-left' : 'md:text-left'} bg-[#F5F5DC]/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none p-4 md:p-0 rounded-lg shadow-sm md:shadow-none`}
+                >
+                    {t.subtitle}
+                </motion.p>
+            </div>
+
+            {/* BOTTOM LEFT: BUTTONS (like "[ TO SEE MORE... ]") */}
+            <div className={`absolute bottom-[5%] lg:bottom-[8%] ${direction === 'rtl' ? 'right-[5%] lg:right-[8%]' : 'left-[5%] lg:left-[8%]'} z-30 flex flex-col sm:flex-row gap-4 w-full sm:w-auto pr-[5%] sm:pr-0`}>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}>
+                    <Link href="#products" className={`inline-flex items-center justify-center px-8 py-5 lg:py-4 bg-accent text-[#F5F5DC] font-bold transition-all hover:bg-[#D4B04C] hover:shadow-[0_0_20px_rgba(251,210,100,0.4)] uppercase tracking-[0.2em] text-[10px] md:text-xs shadow-xl min-w-[200px] w-full sm:w-auto hover:-translate-y-1`}>
                         {t.explore}
                     </Link>
-                    <Link href="/company-profile" className="w-full inline-flex items-center justify-center px-8 py-5 bg-transparent border border-text-main text-text-main font-bold uppercase tracking-[0.2em] text-xs">
+                </motion.div>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1, duration: 1 }}>
+                    <Link href="/company-profile" className={`inline-flex items-center justify-center px-8 py-5 lg:py-4 bg-transparent border border-[#3E2723] text-[#3E2723] hover:bg-[#3E2723] hover:text-[#F5F5DC] hover:shadow-[0_0_20px_rgba(62,39,35,0.2)] font-bold transition-all uppercase tracking-[0.2em] text-[10px] md:text-xs min-w-[200px] w-full sm:w-auto hover:-translate-y-1`}>
                         {t.quote}
                     </Link>
                 </motion.div>
-
             </div>
+
+            {/* CENTER IMAGE: Kitchen Island */}
+            <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none pt-[10vh] lg:pt-[5vh]">
+                <motion.div 
+                    initial={{ scale: 0.95, opacity: 0 }} 
+                    animate={{ scale: 1, opacity: 1, y: [0, -15, 0] }} 
+                    transition={{ 
+                        opacity: { duration: 1.5 }, 
+                        scale: { duration: 1.5, ease: "easeOut" }, 
+                        y: { duration: 6, ease: "easeInOut", repeat: Infinity, delay: 1.5 } 
+                    }}
+                    className="relative w-[95%] md:w-[70%] lg:w-[55%] aspect-[4/3] mix-blend-multiply"
+                >
+                    <Image
+                        src={heroIsland}
+                        alt="Premium Kitchen Island"
+                        fill
+                        className="object-contain drop-shadow-[0_45px_45px_rgba(62,39,35,0.2)]"
+                        priority
+                        quality={100}
+                    />
+                </motion.div>
+            </div>
+            
         </section>
     );
 };
