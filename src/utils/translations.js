@@ -39,7 +39,7 @@ export const translations = {
             titlePart2: "Premium Interiors",
             subtitle: "Experience the perfect blend of functionality and aesthetics with our bespoke modular kitchens and wardrobe systems.",
             explore: "Explore Collection",
-            quote: "Start Your Experience"
+            quote: "View Company Profile"
         },
         about: {
             title: "Crafting Excellence",
@@ -289,7 +289,7 @@ export const translations = {
             titlePart2: "تصاميم داخلية فاخرة",
             subtitle: "اكتشف المزيج المثالي بين الوظائف العملية والجماليات الساحرة مع مطابخنا العصرية وأنظمة الخزائن المصممة خصيصاً لك.",
             explore: "استكشف المجموعة",
-            quote: "ابدأ تجربتك"
+            quote: "عرض ملف الشركة"
         },
         about: {
             title: "صناعة التميز",
